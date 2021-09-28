@@ -11,13 +11,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var MongoStore = require('connect-mongo')(session);
 
+var main = require('./server/routes/main/main');
+
 var port = process.env.PORT || 3000;
 
 app.engine('hbs', hbs({ defaultLayout: 'layout', extname: '.hbs' }));
+app.set('view engine', 'hbs');
 
-app.get('/', (req, res) => {
-	res.send('App is functional!');
-});
+app.use('/', main);
 
 app.listen(port);
 console.log('listening on port ' + port);
