@@ -9,7 +9,7 @@ var hbs = require('express-handlebars');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var MongoStore = require('connect-mongo')(session);
+// var MongoStore = require('connect-mongo')(session);
 
 var main = require('./server/routes/main/main');
 
@@ -19,6 +19,7 @@ app.engine('hbs', hbs({ defaultLayout: 'layout', extname: '.hbs' }));
 app.set('view engine', 'hbs');
 
 app.use('/', main);
+
 
 app.listen(port);
 console.log('listening on port ' + port);
