@@ -1,11 +1,7 @@
 const router = require('express').Router();
 
-router.get('/', (req, res) => {
-	res.render('signin/signin', { layout: 'home/main' });
-});
+const home = require('./home/main');
 
-router.get('/home', (req, res) => {
-	res.render('signin/signin', { layout: 'home/main' });
-});
+router.use('/', home);
 
 module.exports = router;
