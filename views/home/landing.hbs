@@ -1,53 +1,32 @@
 <div class="h-screen bg-gradient-to-r from-blue-dark to-blue-light">
-    <div class="flex justify-between">
-        <div class="p-6 text-white">Logo + Text</div>
-        <button class="p-6 text-white">Login</button>
-    </div>
-    <div>
-        <div class="flex justify-center pt-6">
-            <div class="w-7/12 flex justify-center items-center">
-                <div class="w-7/12">
-                    <div class="flex justify-center text-center font-inconsolata text-white text-5xl">
-                        Welcome to <br /> (Placeholder)!
-                    </div>
-                    <div class="h-6" />
-                    <div class="flex justify-center text-justify font-work-sans text-white">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Diam ultrices felis massa suscipit. Nisi, integer orci blandit aliquet
-                        lorem hac tortor, augue!
-                    </div>
+    <div class="container mx-auto">
+        <div class="flex justify-between">
+            <div class="p-6 text-white">Logo + Text</div>
+        </div>
+        <div class="container">
+            <div class="grid grid-cols-1 items-center justify-center content-center gap-y-8">
+                <div class="justify-center text-center font-incosolata text-white text-5xl">
+                    Welcome to Music Sessions!
                 </div>
-            </div>
-        </div>
-
-        <div class="flex justify-center pt-6 text-white">
-            <div class="flex justify-between w-2/6 pl-0">
-                <a href="/join">
-                    <button type="button"
-                        class="border-white hover:bg-blue-button text-white font-bold py-2 px-4 rounded-full w-44 border-2">
-                        JOIN A SESSION
-                    </button>
-                </a>
-                <a href="/create">
-                    <button type="button"
-                        class="border-white hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-44 border-2">
-                        CREATE SESSION
-                    </button>
-                </a>
-            </div>
-
-        </div>
-
-        <div class="flex justify-center ">
-            <div class="p-4 text-white mt-80">Logo</div>
-            <div>
-                <button class="p-4 text-white mt-80">
-                    About
-                </button>
-                <button class="p-4 text-white mt-80">
-                    Help
-                </button>
-
+                <div class="justify-center text-center font-work-sans text-white">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Diam ultrices felis massa suscipit. Nisi, integer orci blandit aliquet
+                    lorem hac tortor, augue!
+                </div>
+                <div class="lg:space-x-4 justify-around text-center">
+                    <a href="/join" class="">
+                        <button type="button"
+                            class="lg:mb-0 mb-10 border-white text-white font-bold py-2 px-4 rounded-full w-44 border-2 hover:bg-green-spotify">
+                            JOIN A SESSION
+                        </button>
+                    </a>
+                    <a href="/create" class="">
+                        <button type="button"
+                            class="lg:mb-0 mb-10 border-white text-white font-bold py-2 px-4 rounded-full w-44 border-2 hover:bg-green-spotify">
+                            CREATE SESSION
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
