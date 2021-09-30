@@ -1,14 +1,14 @@
 {
   "name": "party_playlist",
   "version": "1.0.0",
-  "description": "Music session app",
+  "description": "A Music Session Web Application",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tailwind:css": "postcss public/styles/tailwind.css -o public/styles/style.css"
   },
-  "author": "",
+  "author": "Aryaman Dhingra",
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "^10.3.6",
