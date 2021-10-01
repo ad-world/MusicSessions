@@ -11,6 +11,8 @@ passport.deserializeUser(function (obj, done) {
 	done(null, obj);
 });
 
+var persistable = {};
+
 passport.use(
 	new SpotifyStrategy(
 		{
@@ -20,14 +22,18 @@ passport.use(
 		},
 		async function (accessToken, refreshToken, expires_in, profile, done) {
 			const data = {
-				name         : profile.displayName,
-				email        : profile.emails[0].value,
-				spotify_id   : profile.id,
-				token        : accessToken,
+				name          : profile.displayName,
+				email         : profile.emails[0].value,
+				spotify_id    : profile.id,
+				token         : accessToken,
 				refresh_token : refreshToken
 			};
 
 			let res = await user_actions.create_user(data);
+
+			persistable.name = data.name;
+			persistable.token = accessToken;
+			persistable.refresh_token = refreshToken;
 
 			return done(null, profile);
 		}
@@ -44,7 +50,7 @@ router.get(
 
 router.get('/auth/callback', passport.authenticate('spotify', { failureRedirect: '/' }), function (req, res) {
 	// Successful authentication, redirect home.
-	res.redirect('/');
+	res.redirect('/login');
 });
 
 module.exports = router;
