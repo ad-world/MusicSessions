@@ -4,13 +4,13 @@
 const User = require('../../models/user');
 const uniqid = require('uniqid');
 
-async function create_user (info) {
+async function create_user (data) {
 	const id = uniqid();
 	const spotify_id = data.spotify_id;
 	const email = data.email;
 	const token = data.token;
 	const refresh_token = data.refresh_token;
-
+    
 	const duplicate = await User.findOne({ email: email }).lean().exec();
 
 	if (duplicate) {
@@ -28,7 +28,8 @@ async function create_user (info) {
 		email         : email,
 		spotify_id    : spotify_id,
 		token         : token,
-		refresh_token : refresh_token
+		refresh_token : refresh_token,
+		online        : false
 	});
 
 	return {
