@@ -12,9 +12,11 @@ const path = require('path');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 var MongoStore = require('connect-mongo')(session);
 
-var main = require('./server/routes/main/main');
+const main = require('./server/routes/main/main');
+const api = require('./server/routes/api/main');
 
 var port = process.env.PORT || 3000;
 
@@ -33,10 +35,10 @@ db.once('open', function () {
 });
 
 const session_settings = {
-	secret          : process.env.SESSION_KEY,
-	resave          : false,
+	secret            : process.env.SESSION_KEY,
+	resave            : false,
 	saveUninitialized : false,
-	cookie          : {
+	cookie            : {
 		maxAge : 2 * 24 * 60 * 60 * 1000
 	}
 };
@@ -45,12 +47,16 @@ session_settings.store = new MongoStore({ mongooseConnection: mongoose.connectio
 
 app.use(session(session_settings));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.engine('hbs', hbs({ defaultLayout: 'layout', extname: '.hbs' }));
 app.set('view engine', 'hbs');
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.use('/', main);
+app.use('/', api);
 
 app.listen(port);
 console.log('listening on port ' + port);
