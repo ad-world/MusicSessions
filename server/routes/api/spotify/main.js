@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
+const url = require('url');
 const SpotifyStrategy = require('passport-spotify').Strategy;
 const user_actions = require('../../../controllers/users/actions');
 
@@ -50,7 +51,16 @@ router.get(
 
 router.get('/auth/callback', passport.authenticate('spotify', { failureRedirect: '/' }), function (req, res) {
 	// Successful authentication, redirect home.
-	res.redirect('/login');
+	res.redirect(
+		url.format({
+			pathname : '/api/login',
+			query    : {
+				name          : persistable.name,
+				token         : persistable.token,
+				refresh_token : persistable.refresh_token
+			}
+		})
+	);
 });
 
 module.exports = router;
