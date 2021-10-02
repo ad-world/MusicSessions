@@ -32,6 +32,7 @@ passport.use(
 
 			let res = await user_actions.create_user(data);
 
+			persistable.id = res.id;
 			persistable.name = data.name;
 			persistable.token = accessToken;
 			persistable.refresh_token = refreshToken;
@@ -55,6 +56,7 @@ router.get('/auth/callback', passport.authenticate('spotify', { failureRedirect:
 		url.format({
 			pathname : '/api/login',
 			query    : {
+				id            : persistable.id,
 				name          : persistable.name,
 				token         : persistable.token,
 				refresh_token : persistable.refresh_token
