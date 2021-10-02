@@ -8,7 +8,12 @@ router.get('/login', (req, res) => {
 	session.name = params.name;
 	session.refresh_token = params.refresh_token;
 
-	res.send(req.session);
+	res.redirect('/');
+});
+
+router.get('/logout', (req, res) => {
+	req.session.destroy();
+	res.redirect('/');
 });
 
 module.exports = router;
