@@ -23,7 +23,18 @@ router.get('/search', util.authenticated, async (req, res) => {
 	} catch (err) {
 		console.error(err);
 	}
-	res.send(data);
+	data = data.tracks.items;
+	data = data.map((item) => {
+		return {
+			name : item.name
+		};
+	});
+
+	const response = {
+		items : data
+	};
+
+	res.send(response);
 });
 
 module.exports = router;
