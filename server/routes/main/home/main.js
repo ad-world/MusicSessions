@@ -4,6 +4,7 @@ const axios = require('axios');
 router.get('/', async (req, res) => {
 	if (req.session.token && req.session.refresh_token) {
 		const name = req.session.name;
+
 		try {
 			const options = {
 				method  : 'GET',

@@ -6,7 +6,7 @@ const util = require('../util/auth');
 router.get('/search', util.authenticated, async (req, res) => {
 	const keywords = req.query.keywords;
 	const token = req.session.token;
-	console.log(keywords);
+
 	var data;
 	try {
 		const options = {
