@@ -15,7 +15,10 @@ module.exports = {
 				light : '#0D1A8E',
 				dark  : '#13043F'
 			},
-			white : '#FFFFFF'
+			white : '#FFFFFF',
+			red   : {
+				main : '#E61565'
+			}
 		}
 	},
 	variants : {
