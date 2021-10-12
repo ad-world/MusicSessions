@@ -36,6 +36,7 @@ passport.use(
 			persistable.name = data.name;
 			persistable.token = accessToken;
 			persistable.refresh_token = refreshToken;
+			persistable.product = profile.product;
 
 			return done(null, profile);
 		}
@@ -59,7 +60,8 @@ router.get('/auth/callback', passport.authenticate('spotify', { failureRedirect:
 				id            : persistable.id,
 				name          : persistable.name,
 				token         : persistable.token,
-				refresh_token : persistable.refresh_token
+				refresh_token : persistable.refresh_token,
+				product       : persistable.product
 			}
 		})
 	);
