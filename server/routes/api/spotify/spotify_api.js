@@ -19,24 +19,32 @@ router.get('/search', util.authenticated, async (req, res) => {
 			url     : `${process.env.SPOTIFY_API}/search?q=` + encodeURIComponent(keywords) + '&type=track'
 		};
 
-		await axios(options).then((result) => (data = result.data));
+		await axios(options).then((result) => (data = result.data ? result.data : false));
 	} catch (err) {
 		console.error(err);
 	}
-	data = data.tracks.items;
-	data = data.map((item) => {
-		return {
-			name    : item.name,
-			artists : item.artists.map((item) => item.name),
-			image   : item.album.images[2].url
+
+	if (data) {
+		data = data.tracks.items;
+		data = data.map((item) => {
+			return {
+				name    : item.name,
+				artists : item.artists.map((item) => item.name),
+				image   : item.album.images[2].url
+			};
+		});
+
+		const response = {
+			items : data
 		};
-	});
 
-	const response = {
-		items : data
-	};
-
-	res.send(response);
+		res.send(response);
+	} else {
+		res.send({
+			status  : 'failure',
+			message : 'No songs found.'
+		});
+	}
 });
 
 module.exports = router;
