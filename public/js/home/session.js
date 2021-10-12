@@ -7,8 +7,10 @@ $(document).ready(function () {
 			url        : 'http://localhost:3000/api/search?keywords={query}'
 		},
 		fields        : {
-			results : 'items',
-			title   : 'name'
+			results     : 'items',
+			title       : 'name',
+			description : 'artists',
+			image       : 'image'
 		},
 		minCharacters : 2
 	});

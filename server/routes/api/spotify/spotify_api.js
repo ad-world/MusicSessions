@@ -26,7 +26,9 @@ router.get('/search', util.authenticated, async (req, res) => {
 	data = data.tracks.items;
 	data = data.map((item) => {
 		return {
-			name : item.name
+			name    : item.name,
+			artists : item.artists.map((item) => item.name),
+			image   : item.album.images[2].url
 		};
 	});
 
