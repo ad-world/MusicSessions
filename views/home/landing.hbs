@@ -4,7 +4,14 @@
             <div class="p-6 text-white">Logo + Text</div>
         </div>
         <div class="container">
-            <div class="grid grid-cols-1 items-center justify-center content-center gap-y-8">
+            <div class="grid grid-cols-1 items-center justify-center content-center gap-y-8 px-3">
+                {{#if errors}}
+                <div class="mx-auto rounded-lg p-4 bg-red-main items-center justify-center">
+                    <div class="font-incosolata text-3xl text-white mx-auto items-center justify-center">
+                        {{errors}}
+                    </div>
+                </div>
+                {{/if}}
                 <div class="justify-center text-center font-incosolata text-white text-5xl">
                     Welcome to Music Sessions!
                 </div>
