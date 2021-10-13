@@ -34,4 +34,22 @@ async function create_queue (host_id) {
 	};
 }
 
-module.exports = { create_user };
+async function delete_queue (host_id, queue_id) {
+	const check = await Queue.findOne({ id: queue_id, host_id: host_id }).lean().exec();
+
+	if (!check) {
+		return {
+			status  : 'failure',
+			message : 'Queue does not exist'
+		};
+	}
+
+	await Queue.deleteOne({ id: queue_id, host_id: host_id }).lean().exec();
+
+	return {
+		status  : 'success',
+		message : 'Queue was deleted successfully'
+	};
+}
+
+module.exports = { create_queue, delete_queue };
