@@ -6,7 +6,15 @@ const Schema = mongoose.Schema;
 
 const QueueSchema = new Schema({
 	id      : String,
-	queue   : [ String ],
+	queue   : [
+		{
+			id      : String,
+			uri     : String,
+			name    : String,
+			artists : String,
+			image   : String
+		}
+	],
 	host_id : String,
 	size    : Number
 });
