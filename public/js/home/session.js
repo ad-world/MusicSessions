@@ -15,3 +15,11 @@ $(document).ready(function () {
 		minCharacters : 2
 	});
 });
+
+function create_queue () {
+	fetch('http://localhost:3000/api/session/create', {
+		method : 'post'
+	})
+		.then((data) => data.json())
+		.then((res) => console.log(res));
+}
