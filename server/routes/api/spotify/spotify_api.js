@@ -21,13 +21,15 @@ router.get('/search', util.authenticated, async (req, res) => {
 
 		await axios(options).then((result) => (data = result.data ? result.data : false));
 	} catch (err) {
-		console.error(err);
+		console.error(err.response);
 	}
 
 	if (data) {
 		data = data.tracks.items;
 		data = data.map((item) => {
 			return {
+				id      : item.id,
+				uri     : item.url,
 				name    : item.name,
 				artists : item.artists.map((item) => item.name),
 				image   : item.album.images[2].url
