@@ -15,15 +15,18 @@ router.get('/', async (req, res) => {
 				},
 				url     : `${process.env.SPOTIFY_API}/me`
 			};
-
-			await axios(options).then((result) => console.log(result.data));
 		} catch (err) {
 			console.error('here');
 		}
 
 		res.render('home/dashboard', { name: name, layout: 'home/main' });
 	} else {
-		res.render('home/landing', { layout: 'home/main' });
+		let error = req.query.error ? 'You must have a premium account to use this service' : '';
+		if (error) {
+			res.render('home/landing', { layout: 'home/main', errors: error });
+		} else {
+			res.render('home/landing', { layout: 'home/main' });
+		}
 	}
 });
 
