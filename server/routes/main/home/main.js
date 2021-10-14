@@ -38,8 +38,6 @@ router.get('/join', (req, res) => {
 	res.render('home/session_selection', { layout: 'home/main' });
 });
 
-router.get('/session', (req, res) => {
-	res.render('home/session', { layout: 'home/session' });
-});
+
 
 module.exports = router;
