@@ -11,6 +11,19 @@
                 <div class="justify-center text-center font-incosolata text-white text-5xl">
                     Hi {{name}}!
                 </div>
+                {{#if online.online}}
+                <div class="justify-center text-center font-work-sans text-white">
+                    You already have a session in progress. Click below to rejoin that session.
+                </div>
+                <div class="lg:space-x-4 justify-around text-center">
+                    <a href="/session/{{online.id}}">
+                        <button type="button"
+                            class="lg:mb-0 mb-10 border-white text-white font-bold py-2 px-4 rounded-full w-44 border-2 hover:bg-green-spotify">
+                            REJOIN
+                        </button>
+                    </a>
+                </div>
+                {{else}}
                 <div class="justify-center text-center font-work-sans text-white">
                     Start a session by clicking create session below!
                 </div>
@@ -20,6 +33,7 @@
                         CREATE SESSION
                     </button>
                 </div>
+                {{/if}}
             </div>
         </div>
     </div>
