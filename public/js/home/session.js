@@ -21,5 +21,12 @@ function create_queue () {
 		method : 'post'
 	})
 		.then((data) => data.json())
-		.then((res) => console.log(res));
+		.then((data) => {
+			let id = data.id;
+
+			let temp = location.href;
+			temp += 'session/' + id;
+
+			location.href = temp;
+		});
 }
