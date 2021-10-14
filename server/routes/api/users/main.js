@@ -1,11 +1,12 @@
 const router = require('express').Router();
+const queue_actions = require('../../../controllers/queue/actions');
 
 router.get('/login', (req, res) => {
 	let params = req.query;
 
 	if (params.product !== 'premium') {
 		return res.redirect('/?error=not_premium');
-	} 
+	}
 	let session = req.session;
 	session.user_id = params.id;
 	session.token = params.token;
@@ -15,7 +16,10 @@ router.get('/login', (req, res) => {
 	return res.redirect('/');
 });
 
-router.get('/logout', (req, res) => {
+router.get('/logout', async (req, res) => {
+	const user_id = req.session.user_id;
+	await queue_actions.delete_queue(user_id);
+
 	req.session.destroy();
 	return res.redirect('/');
 });
