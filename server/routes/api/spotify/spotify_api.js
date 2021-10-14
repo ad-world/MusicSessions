@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const url = require('url');
 const axios = require('axios');
-const util = require('../util/auth');
+const util = require('../../util/auth');
 
 router.get('/search', util.authenticated, async (req, res) => {
 	const keywords = req.query.keywords;

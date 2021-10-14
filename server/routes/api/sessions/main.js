@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const util = require('../util/auth');
+const util = require('../../util/auth');
 const queue_actions = require('../../../controllers/queue/actions');
 
 router.post('/session/create', util.authenticated, async (req, res) => {
