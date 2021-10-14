@@ -52,4 +52,10 @@ async function delete_queue (host_id) {
 	};
 }
 
-module.exports = { create_queue, delete_queue };
+async function check_online (host_id) {
+	const check = await Queue.findOne({ host_id: host_id }).lean().exec();
+
+	return check ? { online: true, id: check.id } : { online: false };
+}
+
+module.exports = { create_queue, delete_queue, check_online };
