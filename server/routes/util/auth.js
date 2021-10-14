@@ -15,7 +15,7 @@ function view_auth (req, res, next) {
 		next();
 	} else {
 		req.session.destroy();
-		res.render('home/landing', { layout: 'home/main' });
+		res.render('error/error', { layout: 'home/main' });
 	}
 }
 
