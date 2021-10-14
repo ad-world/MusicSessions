@@ -58,5 +58,9 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use('/', main);
 app.use('/', api);
 
+app.get('*', (req, res) => {
+	res.render('error/error', { layout: 'home/main' });
+});
+
 app.listen(port);
 console.log('listening on port ' + port);
