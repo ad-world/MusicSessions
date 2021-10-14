@@ -35,7 +35,7 @@ async function create_queue (host_id) {
 }
 
 async function delete_queue (host_id) {
-	const check = await Queue.findOne({ id: queue_id, host_id: host_id }).lean().exec();
+	const check = await Queue.findOne({ host_id: host_id }).lean().exec();
 
 	if (!check) {
 		return {
@@ -44,7 +44,7 @@ async function delete_queue (host_id) {
 		};
 	}
 
-	await Queue.deleteOne({ id: queue_id, host_id: host_id }).lean().exec();
+	await Queue.deleteOne({ host_id: host_id }).lean().exec();
 
 	return {
 		status  : 'success',
