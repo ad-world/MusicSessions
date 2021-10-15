@@ -21,7 +21,7 @@ const QueueSchema = new Schema({
 	size    : Number,
 	ragers  : [
 		{
-			uri  : String,
+			id  : String,
 			name : String
 		}
 	]
