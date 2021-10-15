@@ -3,10 +3,13 @@
 const Queue = require('../../models/queue');
 const User = require('../../models/user');
 const uniqid = require('uniqid');
+const short = require('short-unique-id');
+
+const uid = new short({ length: 7 });
 
 async function create_queue (host_id) {
 	const id = uniqid();
-
+	const join_id = uid();
 	const duplicate = await Queue.findOne({ host_id: host_id }).lean().exec();
 
 	if (duplicate) {
@@ -20,9 +23,11 @@ async function create_queue (host_id) {
 
 	const queue = await Queue.create({
 		id      : id,
+		join_id : join_id,
 		host_id : host_id,
 		queue   : [],
-		size    : 0
+		size    : 0,
+		ragers  : []
 	});
 
 	await User.updateOne({ id: host_id }, { online: true });
