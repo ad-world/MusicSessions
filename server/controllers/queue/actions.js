@@ -57,10 +57,26 @@ async function delete_queue (host_id) {
 	};
 }
 
+async function get_queue (host_id) {
+	const check = await Queue.findOne({ host_id: host_id }).lean().exec();
+
+	if (!check) {
+		return {
+			status  : 'failure',
+			message : 'Queue does not exist'
+		};
+	}
+
+	return {
+		status : 'success',
+		data   : check
+	};
+}
+
 async function check_online (host_id) {
 	const check = await Queue.findOne({ host_id: host_id }).lean().exec();
 
 	return check ? { online: true, id: check.id } : { online: false };
 }
 
-module.exports = { create_queue, delete_queue, check_online };
+module.exports = { create_queue, delete_queue, check_online, get_queue };
