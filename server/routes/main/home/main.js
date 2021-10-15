@@ -25,7 +25,7 @@ router.get('/create', (req, res) => {
 });
 
 router.get('/join', (req, res) => {
-	res.render('home/session_selection', { layout: 'home/main' });
+	res.render('home/session_selection', { layout: 'home/session_selection' });
 });
 
 module.exports = router;
