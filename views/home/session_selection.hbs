@@ -6,11 +6,23 @@
 		<div class="ml-6 lg:ml-40">
 			<div clasName="flex justify-center place-items-center">
 				<h1 class="text-5xl text-white">Join a Session</h1>
-				<h4 class="texl-xl text-white">To join a session, enter the session code below</h4>
+				<h4 class="texl-xl text-white">To join a session, enter your name and the session code below</h4>
 				<br />
-				<div class="">
-					<input type="text" class="px-2 text-white rounded-lg mb-10 py-2 bg-white bg-opacity-0 outline-white" />
-					<br />
+				<div class="w-full">
+					<div class="w-1/3">
+						<label class="text-white" for="name">Name</label>
+					</div>
+					<div class="w-2/3">
+						<input id="name" type="text"
+							class="px-2 text-white rounded-lg mb-10 py-2 bg-white bg-opacity-0 outline-white" />
+					</div>
+					<div class="w-1/3">
+						<label class="text-white" for="code">Session Code</label>
+					</div>
+					<div class="w-2/3">
+						<input id="code" type="text"
+							class="px-2 text-white rounded-lg mb-10 py-2 bg-white bg-opacity-0 outline-white" />
+					</div>
 					<a href="/create" class="">
 						<button type="button"
 							class="lg:mb-0 mb-10 border-white text-white font-bold py-2 px-4 rounded-full w-44 border-2 hover:bg-green-spotify">
