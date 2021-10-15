@@ -6,17 +6,25 @@ const Schema = mongoose.Schema;
 
 const QueueSchema = new Schema({
 	id      : String,
+	join_id : String,
 	queue   : [
 		{
-			id      : String,
-			uri     : String,
-			name    : String,
-			artists : String,
-			image   : String
+			id           : String,
+			uri          : String,
+			name         : String,
+			artists      : String,
+			image        : String,
+			requested_by : String
 		}
 	],
 	host_id : String,
-	size    : Number
+	size    : Number,
+	ragers  : [
+		{
+			uri  : String,
+			name : String
+		}
+	]
 });
 
 const Queue = mongoose.model('Queue', QueueSchema);
