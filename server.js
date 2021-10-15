@@ -39,7 +39,7 @@ const session_settings = {
 	resave            : false,
 	saveUninitialized : false,
 	cookie            : {
-		maxAge : 2 * 24 * 60 * 60 * 1000
+		maxAge : 10 * 24 * 60 * 60 * 1000
 	}
 };
 
