@@ -13,7 +13,9 @@ router.get('/session/:session_id', util.view_auth, async (req, res) => {
 		const queue = await queue_actions.get_queue(user_id);
 		const join_id = queue.data.join_id;
 
-		res.render('home/session', { join_id: join_id, layout: 'home/session' });
+		const connected = queue.data.ragers;
+
+		res.render('home/session', { join_id: join_id, connected: connected, layout: 'home/session' });
 	} else {
 		res.render('error/error', { layout: 'home/main' });
 	}
