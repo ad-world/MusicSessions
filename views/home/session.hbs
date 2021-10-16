@@ -46,17 +46,16 @@
                             </div>
                             <div class="container rounded-lg outline-solid">
                                 <div class="grid grid-cols-1 p-3">
-                                    {{#each users}}
+                                    {{#each connected}}
                                     <div class="flex justify-between my-1">
                                         <div class="text-xl">
                                             {{this.name}}
                                         </div>
                                         <div>
-                                            <a href="/api/session/remove/{{this.id}}">
-                                                <button class="hover:bg-red-main text-black hover:text-white rounded text-xl">
-                                                    <i class="x icon  pl-1 pt-1"></i>
-                                                </button>
-                                            </a>
+                                            <button onclick="remove_rager({{this.id}})"
+                                                class="hover:bg-red-main text-black hover:text-white rounded text-xl">
+                                                <i class="x icon  pl-1 pt-1"></i>
+                                            </button>
                                         </div>
                                     </div>
                                     {{/each}}
