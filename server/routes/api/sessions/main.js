@@ -12,6 +12,10 @@ router.post('/session/create', util.authenticated, async (req, res) => {
 
 router.post('/session/join', async (req, res) => {
 	const { name, join_id } = req.body;
+	
+	if (req.session.connected_id) {
+		await queue_logic.remove_from_queues(req.session.connected_id);
+	}
 
 	const data = {
 		name    : name,
@@ -19,12 +23,10 @@ router.post('/session/join', async (req, res) => {
 	};
 
 	const response = await queue_logic.join_session(data);
-
 	if (response.id) {
 		req.session.name = name;
-		req.session.id = response.id;
+		req.session.connected_id = response.id;
 	}
-
 	return res.send(response);
 });
 module.exports = router;
