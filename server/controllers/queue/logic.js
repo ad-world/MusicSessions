@@ -60,4 +60,23 @@ async function join_session (data) {
 	};
 }
 
-module.exports = { check_host, join_session };
+async function remove_from_queues (connected_id) {
+	let queues = await Queue.find({ 'rager.id': connected_id }).lean().exec();
+
+	if (queues.length) {
+		const updates = {
+			$pull : {
+				ragers : {
+					id : connected_id
+				}
+			},
+			$inc  : {
+				size : -1
+			}
+		};
+
+		await Queue.updateMany({ 'rager.id': connected_id }, updates).lean().exec();
+	}
+}
+
+module.exports = { check_host, join_session, remove_from_queues };
