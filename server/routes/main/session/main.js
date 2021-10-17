@@ -10,7 +10,7 @@ router.get('/session/:session_id', util.view_auth, async (req, res) => {
 	const validation = await queue_logic.check_host(user_id, session_id);
 
 	if (validation.status == 'success') {
-		const queue = await queue_actions.get_queue(user_id);
+		const queue = await queue_actions.get_queue(session_id);
 		const join_id = queue.data.join_id;
 
 		const connected = queue.data.ragers;
@@ -18,6 +18,26 @@ router.get('/session/:session_id', util.view_auth, async (req, res) => {
 		res.render('home/session', { join_id: join_id, connected: connected, layout: 'home/session' });
 	} else {
 		res.render('error/error', { layout: 'home/main' });
+	}
+});
+
+router.get('/session/user/:session_id', async (req, res) => {
+	try {
+		const session_id = req.params.session_id;
+		const connected_id = req.session.connected_id;
+
+		const connected = await queue_logic.check_connected(session_id, connected_id);
+
+		if (connected.status == 'success') {
+			const queue = await queue_actions.get_queue(session_id);
+
+			return res.render('session/user_session', { layout: 'home/session' });
+		} else {
+			return res.render('error/error', { layout: 'home/main' });
+		}
+	} catch (err) {
+		console.log(err);
+		return res.render('error/error', { layout: 'home/main' });
 	}
 });
 
