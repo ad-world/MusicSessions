@@ -3,8 +3,8 @@
 		Back
 	</a>
 	<div class="w-full flex h-screen place-items-center bg-gradient-to-r from-blue-dark to-blue-light">
-		<div class="ml-6 lg:ml-40">
-			<div clasName="flex justify-center place-items-center">
+		<div class="mx-auto grid grid-cols-1 lg:grid-cols-2 ml-6 lg:ml-auto">
+			<div clasName="flex justify-center place-items-center static">
 				<h1 class="text-5xl text-white">Join a Session</h1>
 				<h4 class="texl-xl text-white">To join a session, enter your name and the session code below</h4>
 				<br />
@@ -23,10 +23,20 @@
 						<input id="code" type="text"
 							class="px-2 text-white rounded-lg mb-10 py-2 bg-white bg-opacity-0 outline-white" />
 					</div>
-						<button type="button" onclick="join_session()"
-							class="lg:mb-0 mb-10 border-white text-white font-bold py-2 px-4 rounded-full w-44 border-2 hover:bg-green-spotify">
-							JOIN SESSION
-						</button>
+					<button type="button" onclick="join_session()"
+						class="lg:mb-0 mb-10 border-white text-white font-bold py-2 px-4 rounded-full w-44 border-2 hover:bg-green-spotify">
+						JOIN SESSION
+					</button>
+				</div>
+			</div>
+			<div class="mx-auto hidden mb-10" id="errors">
+				<div class="mx-auto rounded-lg p-4 bg-red-main items-center justify-center">
+					<div class="font-incosolata text-3xl text-white mx-auto items-center justify-center"
+						id="error-header">
+					</div>
+					<div class="font-incosolata text-xl text-white mx-auto items-center justify-center"
+						id="error-message">
+					</div>
 				</div>
 			</div>
 		</div>
