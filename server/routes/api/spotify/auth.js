@@ -27,7 +27,8 @@ passport.use(
 				email         : profile.emails[0].value,
 				spotify_id    : profile.id,
 				token         : accessToken,
-				refresh_token : refreshToken
+				refresh_token : refreshToken,
+				expires_in    : expires_in
 			};
 
 			let res = await user_actions.create_user(data);
@@ -37,6 +38,7 @@ passport.use(
 			persistable.token = accessToken;
 			persistable.refresh_token = refreshToken;
 			persistable.product = profile.product;
+			persistable.expires_in = expires_in;
 
 			return done(null, profile);
 		}
@@ -61,7 +63,8 @@ router.get('/auth/callback', passport.authenticate('spotify', { failureRedirect:
 				name          : persistable.name,
 				token         : persistable.token,
 				refresh_token : persistable.refresh_token,
-				product       : persistable.product
+				product       : persistable.product,
+				expires_in    : persistable.expires_in
 			}
 		})
 	);
