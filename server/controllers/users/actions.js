@@ -10,7 +10,7 @@ async function create_user (data) {
 	const email = data.email;
 	const token = data.token;
 	const refresh_token = data.refresh_token;
-    
+
 	const duplicate = await User.findOne({ email: email }).lean().exec();
 
 	if (duplicate) {
@@ -39,4 +39,33 @@ async function create_user (data) {
 	};
 }
 
-module.exports = { create_user };
+async function update_user (user_id, data) {
+	const check = await User.findOne({ id: user_id }).lean().exec();
+
+	if (!check) {
+		return {
+			status  : 'failure',
+			message : 'User not found'
+		};
+	}
+
+	var keys = Object.keys(data);
+	var set = {};
+
+	for (var i = 0; i < keys.length; i++) {
+		set[keys[i]] = data[keys[i]];
+	}
+
+	var updates = {
+		$set : set
+	};
+
+	await User.updateOne({ id: user_id }, updates).lean().exec();
+
+	return {
+		status  : 'success',
+		message : 'User updated'
+	};
+}
+
+module.exports = { create_user, update_user };
