@@ -57,8 +57,8 @@ async function delete_queue (host_id) {
 	};
 }
 
-async function get_queue (host_id) {
-	const check = await Queue.findOne({ host_id: host_id }).lean().exec();
+async function get_queue (session_id) {
+	const check = await Queue.findOne({ id: session_id }).lean().exec();
 
 	if (!check) {
 		return {
