@@ -19,9 +19,15 @@ function join_session () {
 		.then((res) => res.json())
 		.then((res) => {
 			if (res.status == 'failure') {
-				message('errors','error-header', "There's a problem.", 'error-message', [ `${res.message}` ]);
+				message('errors', 'error-header', "There's a problem.", 'error-message', [ `${res.message}` ]);
 			} else {
-				var temp = location.href;
+				var temp = location.href.split('/');
+				temp.pop();
+				temp.push('session');
+				temp.push(`user/${res.queue_id}`);
+
+				temp = temp.join('/');
+				location.href = temp;
 			}
 		});
 }
