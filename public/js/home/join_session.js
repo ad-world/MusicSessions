@@ -8,7 +8,7 @@ function join_session () {
 	fetch('/api/session/join', {
 		method  : 'post',
 		headers : {
-			Accept       : 'application/json',
+			Accept         : 'application/json',
 			'Content-Type' : 'application/json'
 		},
 		body    : JSON.stringify({
@@ -17,6 +17,11 @@ function join_session () {
 		})
 	})
 		.then((res) => res.json())
-		.then((res) => console.log(res))
-		.catch((err) => console.log(err));
+		.then((res) => {
+			if (res.status == 'failure') {
+				message('errors','error-header', "There's a problem.", 'error-message', [ `${res.message}` ]);
+			} else {
+				var temp = location.href;
+			}
+		});
 }
