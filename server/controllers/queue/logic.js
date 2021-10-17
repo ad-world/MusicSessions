@@ -79,4 +79,31 @@ async function remove_from_queues (connected_id) {
 	}
 }
 
-module.exports = { check_host, join_session, remove_from_queues };
+async function check_connected (session_id, connected_id) {
+	let queue = await Queue.findOne({ id: session_id }).lean().exec();
+
+	if (!queue) {
+		return {
+			status  : 'failure',
+			message : 'Queue not found'
+		};
+	}
+
+	let ragers = queue.ragers;
+
+	let connected = ragers ? ragers.filter((item) => item.id == connected_id) : false;
+
+	if (connected.length) {
+		return {
+			status  : 'success',
+			message : 'User is connected to this session'
+		};
+	} else {
+		return {
+			status  : 'failure',
+			message : 'User is not connected to this session.'
+		};
+	}
+}
+
+module.exports = { check_host, join_session, remove_from_queues, check_connected };
