@@ -2,8 +2,9 @@ const router = require('express').Router();
 const util = require('../../util/auth');
 const queue_actions = require('../../../controllers/queue/actions');
 const queue_logic = require('../../../controllers/queue/logic');
+const refresh = require('../../util/refresh_token');
 
-router.post('/session/create', util.authenticated, async (req, res) => {
+router.post('/session/create', util.authenticated, refresh.refresh, async (req, res) => {
 	const id = req.session.user_id;
 	const queue = await queue_actions.create_queue(id);
 
