@@ -12,6 +12,9 @@ router.get('/login', (req, res) => {
 	session.token = params.token;
 	session.name = params.name;
 	session.refresh_token = params.refresh_token;
+	session.expires_in = params.expires_in * 1000;
+	session.started_at = Date.now();
+
 
 	return res.redirect('/');
 });
