@@ -30,8 +30,10 @@ router.get('/session/user/:session_id', async (req, res) => {
 
 		if (connected.status == 'success') {
 			const queue = await queue_actions.get_queue(session_id);
+			var join_id = queue.data.join_id;
+			var host_name = queue.data.host_name;
 
-			return res.render('session/user_session', { layout: 'home/session' });
+			return res.render('session/user_session', { join_id: join_id, host_name: host_name, layout: 'home/session' });
 		} else {
 			return res.render('error/error', { layout: 'home/main' });
 		}
