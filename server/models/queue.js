@@ -18,6 +18,7 @@ const QueueSchema = new Schema({
 		}
 	],
 	host_id : String,
+	host_name: String,
 	size    : Number,
 	ragers  : [
 		{
