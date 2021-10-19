@@ -3,8 +3,9 @@ const url = require('url');
 const spotify_actions = require('../../../controllers/spotify/actions');
 const queue_logic = require('../../../controllers/queue/logic');
 const util = require('../../util/auth');
+const refresh = require('../../util/refresh_token');
 
-router.get('/search', util.authenticated, async (req, res) => {
+router.get('/search', util.authenticated, refresh.refresh, async (req, res) => {
 	try {
 		const keywords = req.query.keywords;
 		const token = req.session.token;
