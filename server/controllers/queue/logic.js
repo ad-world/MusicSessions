@@ -62,8 +62,7 @@ async function join_session (data) {
 }
 
 async function remove_from_queues (connected_id) {
-	let queues = await Queue.find({ 'rager.id': connected_id }).lean().exec();
-
+	let queues = await Queue.find({ 'ragers.id': connected_id }).lean().exec();
 	if (queues.length) {
 		const updates = {
 			$pull : {
@@ -76,8 +75,16 @@ async function remove_from_queues (connected_id) {
 			}
 		};
 
-		await Queue.updateMany({ 'rager.id': connected_id }, updates).lean().exec();
+		const modified = await Queue.updateMany({ 'ragers.id': connected_id }, updates).lean().exec();
+		return {
+			status  : 'success',
+			message : 'Removed'
+		};
 	}
+
+	return {
+		status : 'failure'
+	};
 }
 
 async function check_connected (session_id, connected_id) {
