@@ -4,7 +4,7 @@ $(document).ready(function () {
 			onResponse : function (res) {
 				console.log(res);
 			},
-			url        : 'http://localhost:3000/api/user/search?keywords={query}'
+			url        : '/api/user/search?keywords={query}'
 		},
 		fields        : {
 			results     : 'items',
