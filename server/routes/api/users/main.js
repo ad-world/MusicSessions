@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const queue_actions = require('../../../controllers/queue/actions');
+const queue_logic = require('../../../controllers/queue/logic');
 
 router.get('/login', (req, res) => {
 	let params = req.query;
@@ -15,13 +16,17 @@ router.get('/login', (req, res) => {
 	session.expires_in = params.expires_in * 1000;
 	session.started_at = Date.now();
 
-
 	return res.redirect('/');
 });
 
 router.get('/logout', async (req, res) => {
-	const user_id = req.session.user_id;
-	await queue_actions.delete_queue(user_id);
+	if (req.session.token) {
+		const user_id = req.session.user_id;
+		await queue_actions.delete_queue(user_id);
+	} else {
+		const connected_id = req.session.connected_id;
+		await queue_logic.remove_from_queues(connected_id);
+	}
 
 	req.session.destroy();
 	return res.redirect('/');
