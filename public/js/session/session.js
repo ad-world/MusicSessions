@@ -1,10 +1,7 @@
 $(document).ready(function () {
 	$('.ui.search').search({
 		apiSettings   : {
-			onResponse : function (res) {
-				console.log(res);
-			},
-			url        : 'http://localhost:3000/api/search?keywords={query}'
+			url        : '/api/search?keywords={query}'
 		},
 		fields        : {
 			results     : 'items',
@@ -17,7 +14,7 @@ $(document).ready(function () {
 });
 
 function create_queue () {
-	fetch('http://localhost:3000/api/session/create', {
+	fetch('/api/session/create', {
 		method : 'post'
 	})
 		.then((data) => data.json())
@@ -28,5 +25,25 @@ function create_queue () {
 			temp += 'session/' + id;
 
 			location.href = temp;
+		});
+}
+
+function remove_rager (connected_id) {
+	fetch('/api/session/remove', {
+		method  : 'post',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json'
+		},
+		body    : JSON.stringify({
+			connected_id : connected_id
+		})
+	})
+		.then((data) => data.json())
+		.then((data) => {
+			if (data.status == 'success') {
+				var temp = location.href;
+				location.href = temp;
+			}
 		});
 }
