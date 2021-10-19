@@ -33,3 +33,12 @@ router.post('/session/join', async (req, res) => {
 	return res.send(response);
 });
 module.exports = router;
+
+router.post('/session/remove', util.authenticated, refresh.refresh, async (req, res) => {
+	const { connected_id } = req.body;
+	console.log(req.body);
+
+	let response = await queue_logic.remove_from_queues(connected_id);
+
+	return res.send(response);
+});
