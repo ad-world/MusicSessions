@@ -34,6 +34,19 @@
                         </button>
                     </a>
                 </div>
+                {{#if session.connected_id}}
+                    <div class="mx-auto text-center">
+                        <div class="text-xl text-white mb-4">
+                            You may already be connected to a session. Click below to rejoin.
+                        </div>
+                        <a href="/session/user/{{session.queue_id}}">
+                            <button type="button"
+                            class="lg:mb-0 mb-10 border-white text-white font-bold py-2 px-4 rounded-full w-44 border-2 hover:bg-red-main">
+                            REJOIN SESSION
+                        </button>
+                        </a>
+                    </div>    
+                {{/if}} 
             </div>
         </div>
     </div>
