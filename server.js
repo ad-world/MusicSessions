@@ -46,6 +46,10 @@ const session_settings = {
 session_settings.store = new MongoStore({ mongooseConnection: mongoose.connection });
 
 app.use(session(session_settings));
+app.use(function (req, res, next) {
+	res.locals.session = req.session;
+	next();
+});
 
 app.use(passport.initialize());
 app.use(passport.session());
