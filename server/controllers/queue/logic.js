@@ -1,4 +1,5 @@
 const Queue = require('../../models/queue');
+const User = require('../../models/user');
 const uniqid = require('uniqid');
 
 async function check_host (host_id, queue_id) {
@@ -106,4 +107,23 @@ async function check_connected (session_id, connected_id) {
 	}
 }
 
-module.exports = { check_host, join_session, remove_from_queues, check_connected };
+async function get_token_from_queue (queue_id) {
+	const queue = await Queue.findOne({ id: queue_id }).lean().exec();
+
+	if (!queue) {
+		return {
+			status  : 'failure',
+			message : 'Session does not exist.'
+		};
+	}
+
+	const host_id = queue.host_id;
+
+	const host = await User.findOne({ id: host_id }).lean().exec();
+
+	const token = host.token;
+
+	return token;
+}
+
+module.exports = { check_host, join_session, remove_from_queues, check_connected, get_token_from_queue };
