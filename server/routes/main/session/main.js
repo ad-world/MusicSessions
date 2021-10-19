@@ -15,7 +15,7 @@ router.get('/session/:session_id', util.view_auth, async (req, res) => {
 
 		const connected = queue.data.ragers;
 
-		res.render('home/session', { join_id: join_id, connected: connected, layout: 'home/session' });
+		res.render('session/session', { join_id: join_id, connected: connected, layout: 'session/session' });
 	} else {
 		res.render('error/error', { layout: 'home/main' });
 	}
@@ -33,7 +33,7 @@ router.get('/session/user/:session_id', async (req, res) => {
 			var join_id = queue.data.join_id;
 			var host_name = queue.data.host_name;
 
-			return res.render('session/user_session', { join_id: join_id, host_name: host_name, layout: 'home/session' });
+			return res.render('session/user_session', { join_id: join_id, host_name: host_name, layout: 'session/user_session' });
 		} else {
 			return res.render('error/error', { layout: 'home/main' });
 		}
