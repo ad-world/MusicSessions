@@ -28,6 +28,7 @@ router.post('/session/join', async (req, res) => {
 	if (response.id) {
 		req.session.name = name;
 		req.session.connected_id = response.id;
+		req.session.queue_id = response.queue_id;
 	}
 	return res.send(response);
 });
