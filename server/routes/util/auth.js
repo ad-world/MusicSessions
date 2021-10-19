@@ -19,4 +19,15 @@ function view_auth (req, res, next) {
 	}
 }
 
-module.exports = { authenticated, view_auth };
+function search_auth (req, res, next) {
+	if (req.session.name && req.session.connected_id) {
+		next();
+	} else {
+		res.status(401).send({
+			status  : 'failure',
+			message : 'Unauthenticated request'
+		});
+	}
+}
+
+module.exports = { authenticated, view_auth, search_auth };
