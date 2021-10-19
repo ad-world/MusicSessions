@@ -1,28 +1,13 @@
 const router = require('express').Router();
 const url = require('url');
-const axios = require('axios');
+const spotify_actions = require('../../../controllers/spotify/actions');
 const util = require('../../util/auth');
 
 router.get('/search', util.authenticated, async (req, res) => {
 	const keywords = req.query.keywords;
 	const token = req.session.token;
 
-	var data;
-	try {
-		const options = {
-			method  : 'GET',
-			headers : {
-				Authorization  : 'Bearer ' + token,
-				'Content-Type' : 'application/json',
-				Accept         : 'application/json'
-			},
-			url     : `${process.env.SPOTIFY_API}/search?q=` + encodeURIComponent(keywords) + '&type=track'
-		};
-
-		await axios(options).then((result) => (data = result.data ? result.data : false));
-	} catch (err) {
-		console.error(err.response);
-	}
+	var data = await spotify_actions.host_search(keywords, token);
 
 	if (data) {
 		data = data.tracks.items;
