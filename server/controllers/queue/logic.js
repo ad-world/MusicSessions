@@ -150,6 +150,17 @@ async function add_to_queue (song, queue_id) {
 	};
 
 	let res = await Queue.updateOne({ id: queue_id }, updates).lean().exec();
+	if (res.nModified) {
+		return {
+			status  : 'success',
+			message : 'Song was added to the queue'
+		};
+	}
+
+	return {
+		status  : 'failure',
+		message : 'Error'
+	};
 }
 
 module.exports = { check_host, join_session, remove_from_queues, check_connected, get_token_from_queue, add_to_queue };
