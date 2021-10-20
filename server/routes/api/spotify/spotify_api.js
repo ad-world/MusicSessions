@@ -17,7 +17,7 @@ router.get('/search', util.authenticated, refresh.refresh, async (req, res) => {
 			data = data.map((item) => {
 				return {
 					id      : item.id,
-					uri     : item.url,
+					uri     : item.uri,
 					name    : item.name,
 					artists : item.artists.map((item) => item.name),
 					image   : item.album.images[2].url
@@ -40,7 +40,7 @@ router.get('/search', util.authenticated, refresh.refresh, async (req, res) => {
 	}
 });
 
-router.get('/user/search', util.search_auth, async (req, res) => {
+router.get('/user/search', util.user_auth, async (req, res) => {
 	try {
 		const queue_id = req.session.queue_id;
 		const keywords = req.query.keywords;
@@ -53,7 +53,7 @@ router.get('/user/search', util.search_auth, async (req, res) => {
 			data = data.map((item) => {
 				return {
 					id      : item.id,
-					uri     : item.url,
+					uri     : item.uri,
 					name    : item.name,
 					artists : item.artists.map((item) => item.name),
 					image   : item.album.images[2].url
