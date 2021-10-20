@@ -6,6 +6,6 @@ const sessions = require('./sessions/main');
 
 router.use('/api', spotify);
 router.use('/api', users);
-router.use('/api', sessions);
+router.use('/api/session', sessions);
 
 module.exports = router;
