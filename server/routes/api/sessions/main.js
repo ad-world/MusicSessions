@@ -45,14 +45,14 @@ router.post('/remove', util.authenticated, refresh.refresh, async (req, res) => 
 
 router.post('/add/user/song', util.user_auth, async (req, res) => {
 	const { song } = req.body;
-	const { name } = req.session;
+	const { name, queue_id } = req.session;
 
 	const data = {
 		requested_by : name,
 		...song
 	};
 
-	console.log(data);
+	let response = await queue_logic.add_to_queue(data, queue_id);
 
-	return res.send(song);
+	return res.send(response);
 });
