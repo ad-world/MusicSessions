@@ -19,7 +19,7 @@ function view_auth (req, res, next) {
 	}
 }
 
-function search_auth (req, res, next) {
+function user_auth (req, res, next) {
 	if (req.session.name && req.session.connected_id) {
 		next();
 	} else {
@@ -30,4 +30,5 @@ function search_auth (req, res, next) {
 	}
 }
 
-module.exports = { authenticated, view_auth, search_auth };
+
+module.exports = { authenticated, view_auth, user_auth };
