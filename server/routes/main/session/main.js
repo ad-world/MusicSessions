@@ -12,10 +12,15 @@ router.get('/session/:session_id', util.view_auth, async (req, res) => {
 	if (validation.status == 'success') {
 		const queue = await queue_actions.get_queue(session_id);
 		const join_id = queue.data.join_id;
-
+		const size = queue.data.size;
 		const connected = queue.data.ragers;
 
-		res.render('session/session', { join_id: join_id, connected: connected, layout: 'session/session' });
+		res.render('session/session', {
+			join_id: join_id,
+			connected: connected,
+			size: size,
+			layout: 'session/session'
+		});
 	} else {
 		res.render('error/error', { layout: 'home/main' });
 	}
@@ -33,7 +38,11 @@ router.get('/session/user/:session_id', async (req, res) => {
 			var join_id = queue.data.join_id;
 			var host_name = queue.data.host_name;
 
-			return res.render('session/user_session', { join_id: join_id, host_name: host_name, layout: 'session/user_session' });
+			return res.render('session/user_session', {
+				join_id   : join_id,
+				host_name : host_name,
+				layout    : 'session/user_session'
+			});
 		} else {
 			return res.render('error/error', { layout: 'home/main' });
 		}
