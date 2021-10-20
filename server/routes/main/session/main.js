@@ -14,12 +14,15 @@ router.get('/session/:session_id', util.view_auth, async (req, res) => {
 		const join_id = queue.data.join_id;
 		const size = queue.data.size;
 		const connected = queue.data.ragers;
+		const songs = queue.data.queue.length ? queue.data.queue : [];
+
 
 		res.render('session/session', {
-			join_id: join_id,
-			connected: connected,
-			size: size,
-			layout: 'session/session'
+			join_id   : join_id,
+			connected : connected,
+			size      : size,
+			songs     : songs,
+			layout    : 'session/session'
 		});
 	} else {
 		res.render('error/error', { layout: 'home/main' });
@@ -37,10 +40,12 @@ router.get('/session/user/:session_id', async (req, res) => {
 			const queue = await queue_actions.get_queue(session_id);
 			var join_id = queue.data.join_id;
 			var host_name = queue.data.host_name;
+			const songs = queue.data.queue.length ? queue.data.queue : [];
 
 			return res.render('session/user_session', {
 				join_id   : join_id,
 				host_name : host_name,
+				songs     : songs,
 				layout    : 'session/user_session'
 			});
 		} else {
