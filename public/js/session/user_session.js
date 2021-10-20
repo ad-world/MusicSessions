@@ -12,6 +12,22 @@ $(document).ready(function () {
 			description : 'artists',
 			image       : 'image'
 		},
-		minCharacters : 2
+		minCharacters : 2,
+		onSelect      : function (result, response) {
+			const song = result;
+			fetch('/api/session/add/user/song', {
+				method  : 'post',
+				headers : {
+					Accept         : 'application/json',
+					'Content-Type' : 'application/json'
+				},
+				body    : JSON.stringify({
+					song : song
+				})
+			})
+				.then((res) => res.json())
+				.then((res) => console.log(res))
+				.catch((err) => console.error(err));
+		}
 	});
 });
