@@ -133,4 +133,23 @@ async function get_token_from_queue (queue_id) {
 	return token;
 }
 
-module.exports = { check_host, join_session, remove_from_queues, check_connected, get_token_from_queue };
+async function add_to_queue (song, queue_id) {
+	const queue = await Queue.findOne({ id: queue_id }).lean().exec();
+
+	if (!queue) {
+		return {
+			status  : 'failure',
+			message : 'Session does not exist.'
+		};
+	}
+
+	const updates = {
+		$push : {
+			queue : song
+		}
+	};
+
+	let res = await Queue.updateOne({ id: queue_id }, updates).lean().exec();
+}
+
+module.exports = { check_host, join_session, remove_from_queues, check_connected, get_token_from_queue, add_to_queue };
