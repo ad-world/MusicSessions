@@ -5,24 +5,24 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const QueueSchema = new Schema({
-	id      : String,
-	join_id : String,
-	queue   : [
+	id        : String,
+	join_id   : String,
+	queue     : [
 		{
 			id           : String,
 			uri          : String,
 			name         : String,
-			artists      : String,
+			artists      : [ String ],
 			image        : String,
 			requested_by : String
 		}
 	],
-	host_id : String,
-	host_name: String,
-	size    : Number,
-	ragers  : [
+	host_id   : String,
+	host_name : String,
+	size      : Number,
+	ragers    : [
 		{
-			id  : String,
+			id   : String,
 			name : String
 		}
 	]
