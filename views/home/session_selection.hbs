@@ -3,8 +3,8 @@
 		Back
 	</a>
 	<div class="w-full flex h-screen place-items-center bg-gradient-to-r from-blue-dark to-blue-light">
-		<div class="mx-auto grid grid-cols-1 lg:grid-cols-2 ml-6 lg:ml-auto">
-			<div clasName="flex justify-center place-items-center static">
+		<div class="mx-auto grid grid-cols-1 lg:grid-cols-1 ml-6 lg:ml-auto">
+			<div clasName="flex justify-center place-items-center static mb-[-10]">
 				<h1 class="text-5xl text-white">Join a Session</h1>
 				<h4 class="texl-xl text-white">To join a session, enter your name and the session code below</h4>
 				<br />
@@ -29,14 +29,10 @@
 					</button>
 				</div>
 			</div>
-			<div class="mx-auto hidden mb-10" id="errors">
-				<div class="mx-auto rounded-lg p-4 bg-red-main items-center justify-center">
-					<div class="font-incosolata text-3xl text-white mx-auto items-center justify-center"
-						id="error-header">
-					</div>
-					<div class="font-incosolata text-xl text-white mx-auto items-center justify-center"
-						id="error-message">
-					</div>
+			<div class="hidden transition-all mt-10" role="alert" id="errors">
+				<div class="bg-red-main text-white font-bold rounded-t px-4 py-2" id="error-header">
+				</div>
+				<div class="border-red border-t-0 border-red-400 text-white rounded-b bg-red-main px-4 py-3 text-red-700" id="error-message">
 				</div>
 			</div>
 		</div>
