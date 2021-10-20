@@ -4,7 +4,7 @@ const queue_actions = require('../../../controllers/queue/actions');
 const queue_logic = require('../../../controllers/queue/logic');
 const refresh = require('../../util/refresh_token');
 
-router.post('/session/create', util.authenticated, refresh.refresh, async (req, res) => {
+router.post('/create', util.authenticated, refresh.refresh, async (req, res) => {
 	const id = req.session.user_id;
 	const name = req.session.name;
 	const queue = await queue_actions.create_queue(id, name);
@@ -12,7 +12,7 @@ router.post('/session/create', util.authenticated, refresh.refresh, async (req, 
 	return res.send(queue);
 });
 
-router.post('/session/join', async (req, res) => {
+router.post('/join', async (req, res) => {
 	const { name, join_id } = req.body;
 
 	if (req.session.connected_id) {
@@ -34,11 +34,25 @@ router.post('/session/join', async (req, res) => {
 });
 module.exports = router;
 
-router.post('/session/remove', util.authenticated, refresh.refresh, async (req, res) => {
+router.post('/remove', util.authenticated, refresh.refresh, async (req, res) => {
 	const { connected_id } = req.body;
 	console.log(req.body);
 
 	let response = await queue_logic.remove_from_queues(connected_id);
 
 	return res.send(response);
+});
+
+router.post('/add/user/song', util.user_auth, async (req, res) => {
+	const { song } = req.body;
+	const { name } = req.session;
+
+	const data = {
+		requested_by : name,
+		...song
+	};
+
+	console.log(data);
+
+	return res.send(song);
 });
