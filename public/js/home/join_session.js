@@ -2,8 +2,10 @@ function join_session () {
 	var name = $('#name').val();
 	var code = $('#code').val();
 
-	console.log(name);
-	console.log(code);
+	if (!name.length || !code.length) {
+		message('errors', 'error-header', "There's a problem.", 'error-message', 'Name or code cannot be empty.');
+		return;
+	}
 
 	fetch('/api/session/join', {
 		method  : 'post',
@@ -20,6 +22,7 @@ function join_session () {
 		.then((res) => {
 			if (res.status == 'failure') {
 				message('errors', 'error-header', "There's a problem.", 'error-message', [ `${res.message}` ]);
+				return;
 			} else {
 				var temp = location.href.split('/');
 				temp.pop();
@@ -28,6 +31,7 @@ function join_session () {
 
 				temp = temp.join('/');
 				location.href = temp;
+				return;
 			}
 		});
 }
