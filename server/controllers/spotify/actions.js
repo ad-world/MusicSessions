@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-async function host_search (keywords, token) {
+async function search (keywords, token) {
 	var data;
 	try {
 		const options = {
@@ -41,4 +41,4 @@ async function currently_playing (token) {
 
 	return data;
 }
-module.exports = { host_search, currently_playing };
+module.exports = { search, currently_playing };

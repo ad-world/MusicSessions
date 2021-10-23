@@ -10,7 +10,7 @@ router.get('/search', util.authenticated, refresh.refresh, async (req, res) => {
 		const keywords = req.query.keywords;
 		const token = req.session.token;
 
-		var data = await spotify_actions.host_search(keywords, token);
+		var data = await spotify_actions.search(keywords, token);
 
 		if (data) {
 			data = data.tracks.items;
@@ -46,7 +46,7 @@ router.get('/user/search', util.user_auth, async (req, res) => {
 		const keywords = req.query.keywords;
 		const token = await queue_logic.get_token_from_queue(queue_id);
 
-		var data = await spotify_actions.host_search(keywords, token);
+		var data = await spotify_actions.search(keywords, token);
 
 		if (data) {
 			data = data.tracks.items;
