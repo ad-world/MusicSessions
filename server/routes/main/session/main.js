@@ -2,10 +2,15 @@ const router = require('express').Router();
 const util = require('../../util/auth');
 const queue_logic = require('../../../controllers/queue/logic');
 const queue_actions = require('../../../controllers/queue/actions');
+const spotify_actions = require('../../../controllers/spotify/actions');
+const refresh = require('../../util/refresh_token');
 
-router.get('/session/:session_id', util.view_auth, async (req, res) => {
+router.get('/session/:session_id', util.view_auth, refresh.refresh, async (req, res) => {
 	const session_id = req.params.session_id;
 	const user_id = req.session.user_id;
+	const token = req.session.token;
+
+	console.log(token);
 
 	const validation = await queue_logic.check_host(user_id, session_id);
 
@@ -16,6 +21,9 @@ router.get('/session/:session_id', util.view_auth, async (req, res) => {
 		const connected = queue.data.ragers;
 		const songs = queue.data.queue.length ? queue.data.queue : [];
 
+		const now_playing = await spotify_actions.currently_playing(token);
+
+		console.log(now_playing);
 
 		res.render('session/session', {
 			join_id   : join_id,
