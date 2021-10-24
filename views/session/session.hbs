@@ -1,4 +1,4 @@
-<div class="h-screen bg-gradient-to-r from-blue-dark to-blue-light">
+<div class="lg:h-full h-auto bg-gradient-to-r from-blue-dark to-blue-light">
     <div class="container mx-auto">
         <div class="flex justify-between">
             <div class="p-6 text-white">Logo + Text</div>
@@ -12,7 +12,7 @@
                 <div class="justify-center text-center font-incosolata text-white text-5xl">
                     Your Session - {{join_id}}
                 </div>
-                <div class="grid lg:grid-cols-4 w-full gap-x-8 gap-y-8">
+                <div class="grid lg:grid-cols-4 lg:w-full gap-x-8 gap-y-8 ">
                     <div class="mx-auto">
                         <div class="ui grey font-inconsolata inverted medium header">
                             Search for songs
@@ -25,19 +25,19 @@
                             <div class="results"></div>
                         </div>
                     </div>
-                    <div class="mx-auto w-full h-full">
+                    <div class="mx-auto w-3/4 lg:w-full h-full">
                         <div class="container rounded-lg bg-green-spotify w-full h-full">
                             <div class="font-inconsolata text-white text-2xl lg:text-4xl text-center mx-auto pt-6">
-                                The Queue
+                                Currently Playing
                             </div>
                         </div>
                     </div>
-                    <div class="mx-auto w-full h-full">
+                    <div class="mx-auto w-3/4 lg:w-full h-full">
                         <div class="container rounded-lg bg-green-spotify w-full h-full">
                             <div class="font-inconsolata text-white text-2xl lg:text-4xl text-center mx-auto pt-6">
                                 Song Requests
                             </div>
-                            <div class="container rounded-lg bg-black w-5/6 mx-auto py-2 my-4 outline-white">
+                            <div class="container rounded-lg bg-black w-5/6 mx-auto py-2 my-4 outline-white overflow-scroll max-h-96">
                                 {{#if songs.length}}
                                 {{#each songs}}
                                 <div class="m-4 p-4 my-6 rounded-lg outline-white">
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mx-auto w-full h-full">
+                    <div class="mx-auto w-3/4 lg:w-full h-full">
                         <div class="container rounded-lg bg-white w-full h-full">
                             <div class="font-inconsolata text-2xl lg:text-4xl text-center mx-auto pt-6">
                                 Connected - {{size}}
