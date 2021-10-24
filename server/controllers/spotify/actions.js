@@ -22,8 +22,8 @@ async function search (keywords, token) {
 }
 
 async function currently_playing (token) {
-	console.log(token);
-	var data;
+	var data = {};
+	var response = {};
 	try {
 		const options = {
 			method  : 'GET',
@@ -35,12 +35,30 @@ async function currently_playing (token) {
 			url     : `${process.env.SPOTIFY_API}/me/player`
 		};
 
-		await axios(options).then((res) => (data = res.data));
+		await axios(options).then((res) => {
+			if (res.status == 204) {
+				data = {};
+				response = {
+					status  : 'failure',
+					message : 'Player is not active.'
+				};
+				return;
+			}
+
+			data = res.data.item;
+			response = {
+				name    : data.name,
+				artists : data.artists.map((item) => item.name),
+				image   : data.album.images[0]
+			};
+		});
 	} catch (err) {
 		console.error(err);
 	}
 
 	console.log(data);
-	return data;
+	console.log(response);
+
+	return response;
 }
 module.exports = { search, currently_playing };
