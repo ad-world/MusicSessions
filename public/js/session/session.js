@@ -63,3 +63,24 @@ function remove_rager (connected_id) {
 			}
 		});
 }
+
+function remove_song (song_id) {
+	fetch('/api/session/remove/host/song', {
+		method  : 'post',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json'
+		},
+		body    : JSON.stringify({
+			song_id : song_id
+		})
+	})
+		.then((data) => data.json())
+		.then((data) => {
+			if (data.status == 'success') {
+				var temp = location.href;
+				location.href = temp;
+			}
+		})
+		.catch((err) => console.error(err));
+}
