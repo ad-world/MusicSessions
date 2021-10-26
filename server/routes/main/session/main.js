@@ -10,8 +10,6 @@ router.get('/session/:session_id', util.view_auth, refresh.refresh, async (req, 
 	const user_id = req.session.user_id;
 	const token = req.session.token;
 
-	console.log(token);
-
 	const validation = await queue_logic.check_host(user_id, session_id);
 
 	if (validation.status == 'success') {
@@ -22,14 +20,14 @@ router.get('/session/:session_id', util.view_auth, refresh.refresh, async (req, 
 		const songs = queue.data.queue.length ? queue.data.queue : [];
 
 		const now_playing = await spotify_actions.currently_playing(token);
-
-		console.log(now_playing);
+		const current = Object.keys(now_playing).length ? now_playing : false;
 
 		res.render('session/session', {
 			join_id   : join_id,
 			connected : connected,
 			size      : size,
 			songs     : songs,
+			current   : current,
 			layout    : 'session/session'
 		});
 	} else {
