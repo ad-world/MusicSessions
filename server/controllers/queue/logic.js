@@ -176,7 +176,7 @@ async function add_to_queue (song, queue_id) {
 // 	// run spotify queue thing here
 // }
 
-async function decline_song (song, queue_id) {
+async function decline_song (song_id, queue_id) {
 	const queue = await Queue.findOne({ id: queue_id }).lean().exec();
 
 	if (!queue) {
@@ -189,7 +189,7 @@ async function decline_song (song, queue_id) {
 	const updates = {
 		$pull : {
 			queue : {
-				id : song.id
+				id : song_id
 			}
 		}
 	};
