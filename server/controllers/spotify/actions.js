@@ -37,27 +37,22 @@ async function currently_playing (token) {
 
 		await axios(options).then((res) => {
 			if (res.status == 204) {
-				data = {};
 				response = {
 					status  : 'failure',
 					message : 'Player is not active.'
 				};
-				return;
+			} else {
+				data = res.data.item;
+				response = {
+					name    : data.name,
+					artists : data.artists.map((item) => item.name),
+					image   : data.album.images[0]
+				};
 			}
-
-			data = res.data.item;
-			response = {
-				name    : data.name,
-				artists : data.artists.map((item) => item.name),
-				image   : data.album.images[0]
-			};
 		});
 	} catch (err) {
 		console.error(err);
 	}
-
-	console.log(data);
-	console.log(response);
 
 	return response;
 }
