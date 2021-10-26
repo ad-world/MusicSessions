@@ -176,8 +176,8 @@ async function add_to_queue (song, queue_id) {
 // 	// run spotify queue thing here
 // }
 
-async function decline_song (song_id, queue_id) {
-	const queue = await Queue.findOne({ id: queue_id }).lean().exec();
+async function decline_song (song_id, host_id) {
+	const queue = await Queue.findOne({ host_id: host_id }).lean().exec();
 
 	if (!queue) {
 		return {
@@ -194,19 +194,12 @@ async function decline_song (song_id, queue_id) {
 		}
 	};
 
-	const res = await Queue.updateOne({ id: queue_id }, updates).lean().exec();
+	const res = await Queue.updateOne({ host_id: host_id }, updates).lean().exec();
 
-	if (res.nModified) {
-		return {
-			status  : 'success',
-			message : 'Song removed'
-		};
-	} else {
-		return {
-			status  : 'failure',
-			message : 'Error'
-		};
-	}
+	return {
+		status  : 'success',
+		message : 'Song removed'
+	};
 }
 
 module.exports = {
