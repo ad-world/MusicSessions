@@ -163,4 +163,58 @@ async function add_to_queue (song, queue_id) {
 	};
 }
 
-module.exports = { check_host, join_session, remove_from_queues, check_connected, get_token_from_queue, add_to_queue };
+// async function accept_song (song, queue_id, host_id) {
+// 	const queue = await Queue.findOne({ id: queue_id }).lean().exec();
+
+// 	if (!queue) {
+// 		return {
+// 			status  : 'failure',
+// 			message : 'Session does not exist'
+// 		};
+// 	}
+
+// 	// run spotify queue thing here
+// }
+
+async function decline_song (song, queue_id) {
+	const queue = await Queue.findOne({ id: queue_id }).lean().exec();
+
+	if (!queue) {
+		return {
+			status  : 'failure',
+			message : 'Session does not exist'
+		};
+	}
+
+	const updates = {
+		$pull : {
+			queue : {
+				id : song.id
+			}
+		}
+	};
+
+	const res = await Queue.updateOne({ id: queue_id }, updates).lean().exec();
+
+	if (res.nModified) {
+		return {
+			status  : 'success',
+			message : 'Song removed'
+		};
+	} else {
+		return {
+			status  : 'failure',
+			message : 'Error'
+		};
+	}
+}
+
+module.exports = {
+	check_host,
+	join_session,
+	remove_from_queues,
+	check_connected,
+	get_token_from_queue,
+	add_to_queue,
+	decline_song
+};
