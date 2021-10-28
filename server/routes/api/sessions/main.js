@@ -56,3 +56,12 @@ router.post('/add/user/song', util.user_auth, async (req, res) => {
 
 	return res.send(response);
 });
+
+router.post('/remove/host/song', util.authenticated, refresh.refresh, async (req, res) => {
+	const id = req.session.user_id;
+	const song_id = req.body.song_id;
+
+	let response = await queue_logic.decline_song(song_id, id);
+	console.log(response);
+	return res.send(response);
+});
