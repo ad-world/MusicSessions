@@ -26,7 +26,13 @@ $(document).ready(function () {
 				})
 			})
 				.then((res) => res.json())
-				.then((res) => console.log(res))
+				.then((res) => {
+					console.log(res);
+					if (res.status == 'success') {
+						var temp = location.href;
+						location.href = temp;
+					}
+				})
 				.catch((err) => console.error(err));
 		}
 	});
