@@ -20,7 +20,8 @@ router.get('/session/:session_id', util.view_auth, refresh.refresh, async (req, 
 		const songs = queue.data.queue.length ? queue.data.queue : [];
 
 		const now_playing = await spotify_actions.currently_playing(token);
-		const current = Object.keys(now_playing).length ? now_playing : false;
+
+		const current = now_playing.status == 'failure' ? false : now_playing;
 
 		res.render('session/session', {
 			join_id   : join_id,
