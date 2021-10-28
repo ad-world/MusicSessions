@@ -150,16 +150,9 @@ async function add_to_queue (song, queue_id) {
 	};
 
 	let res = await Queue.updateOne({ id: queue_id }, updates).lean().exec();
-	if (res.nModified) {
-		return {
-			status  : 'success',
-			message : 'Song was added to the queue'
-		};
-	}
-
 	return {
-		status  : 'failure',
-		message : 'Error'
+		status  : 'success',
+		message : 'Song was added to the queue'
 	};
 }
 
