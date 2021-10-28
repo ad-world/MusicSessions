@@ -32,7 +32,7 @@ async function currently_playing (token) {
 				'Content-Type' : 'application/json',
 				Accept         : 'application/json'
 			},
-			url     : `${process.env.SPOTIFY_API}/me/player`
+			url     : `${process.env.SPOTIFY_API}/me/player/currently-playing`
 		};
 
 		await axios(options).then((res) => {
