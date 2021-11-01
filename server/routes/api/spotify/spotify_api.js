@@ -76,4 +76,17 @@ router.get('/user/search', util.user_auth, async (req, res) => {
 	}
 });
 
+router.get('/song/add', util.authenticated, refresh.refresh, async (req, res) => {
+	try {
+		const token = req.session.token;
+		const uri = req.query.uri;
+
+		let response = await spotify_actions.add_to_queue(uri, token);
+
+		res.send(response);
+	} catch (err) {
+		console.error(err);
+	}
+});
+
 module.exports = router;
