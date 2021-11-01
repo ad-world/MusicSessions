@@ -56,4 +56,34 @@ async function currently_playing (token) {
 
 	return response;
 }
-module.exports = { search, currently_playing };
+
+async function add_to_queue (uri, token) {
+	console.log(`${process.env.SPOTIFY_API}/me/player/queue?uri=${uri}`);
+	try {
+		const options = {
+			method  : 'post',
+			headers : {
+				Authorization  : 'Bearer ' + token,
+				'Content-Type' : 'application/json',
+				Accept         : 'application/json'
+			},
+			url     : `${process.env.SPOTIFY_API}/me/player/queue?uri=${uri}`
+		};
+
+		const response = await axios(options);
+		if (response.status == 404) {
+			return {
+				status  : 'failure',
+				message : 'Please start playback on your device before accepting songs.'
+			};
+		} else if (response.status == 204) {
+			return {
+				status  : 'success',
+				message : 'Song added.'
+			};
+		}
+	} catch (err) {
+		console.error(err);
+	}
+}
+module.exports = { search, currently_playing, add_to_queue };
