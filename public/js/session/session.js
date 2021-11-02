@@ -85,14 +85,19 @@ function remove_song (song_id) {
 		.catch((err) => console.error(err));
 }
 
-function add_song (uri) {
+function add_song (uri, song_id) {
 	if (!uri) {
 		return;
 	}
 
-	console.log(uri);
 	fetch(`/api/song/add?uri=${uri}`)
 		.then((res) => res.json())
-		.then((res) => console.log(res))
+		.then((res) => {
+			if (res.status == 'failure') {
+				alert_message('Something went wrong', res.message);
+			} else {
+				remove_song(song_id);
+			}
+		})
 		.catch((err) => console.log(err));
 }
