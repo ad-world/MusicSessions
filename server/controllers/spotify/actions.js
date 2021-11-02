@@ -71,19 +71,17 @@ async function add_to_queue (uri, token) {
 		};
 
 		const response = await axios(options);
-		if (response.status == 404) {
-			return {
-				status  : 'failure',
-				message : 'Please start playback on your device before accepting songs.'
-			};
-		} else if (response.status == 204) {
-			return {
-				status  : 'success',
-				message : 'Song added.'
-			};
-		}
+
+		return {
+			status  : 'success',
+			message : 'Song added.'
+		};
+		
 	} catch (err) {
-		console.error(err);
+		return {
+			status  : 'failure',
+			message : 'Please start playback on your device before accepting songs.'
+		};
 	}
 }
 module.exports = { search, currently_playing, add_to_queue };
