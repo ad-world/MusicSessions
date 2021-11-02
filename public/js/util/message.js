@@ -9,3 +9,15 @@ function message (errorDiv, header, headerVal, error, errorVals) {
 
 	$(`#${errorDiv}`).removeClass('hidden');
 }
+
+function alert_message (header, message) {
+	$('#alert-header').html(header);
+	$('#alert-body').html(message);
+
+	$('#alert').removeClass('hidden');
+}
+
+function hide_alert() {
+	$('#alert').addClass('hidden');
+	
+}
