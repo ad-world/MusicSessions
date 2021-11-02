@@ -36,7 +36,6 @@ module.exports = router;
 
 router.post('/remove', util.authenticated, refresh.refresh, async (req, res) => {
 	const { connected_id } = req.body;
-	console.log(req.body);
 
 	let response = await queue_logic.remove_from_queues(connected_id);
 
@@ -62,6 +61,6 @@ router.post('/remove/host/song', util.authenticated, refresh.refresh, async (req
 	const song_id = req.body.song_id;
 
 	let response = await queue_logic.decline_song(song_id, id);
-	console.log(response);
+
 	return res.send(response);
 });
