@@ -97,10 +97,16 @@ async function skip_song (token, next) {
 		};
 
 		const response = await axios(options);
+
+		return {
+			status  : 'success',
+			message : 'Song skipped'
+		};
 	} catch (err) {
 		console.log(err);
 		return {
-			status : 'failure'
+			status  : 'failure',
+			message : 'Undefined error'
 		};
 	}
 }
