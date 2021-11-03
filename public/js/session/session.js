@@ -101,3 +101,20 @@ function add_song (uri, song_id) {
 		})
 		.catch((err) => console.log(err));
 }
+
+function skip_song (next) {
+	let action = 'prev';
+	if (next) action = 'next';
+
+	fetch(`/api/song/skip?action=${next}`)
+		.then((res) => res.json())
+		.then((res) => {
+			if (res.staus == 'failure') {
+				alert_message('Something went wrong', res.mesasge);
+			} else {
+				var temp = location.href;
+				location.href = temp;
+			}
+		})
+		.catch((err) => console.error(err));
+}

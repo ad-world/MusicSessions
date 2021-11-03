@@ -43,8 +43,8 @@
                                 class="container rounded-lg bg-black w-5/6 mx-auto py-2 my-4 outline-white max-h-96 mx-auto">
                                 {{#if current}}
                                 <div class="m-4 p-4 rounded-lg mx-auto justify-center">
-                                    <div class="object-scale-down rounded-lg mx-auto w-auto h-auto outline-white">
-                                        <img src="{{current.image.url}}" width="200" height="200">
+                                    <div class="object-scale-down rounded-lg mx-auto outline-white" style="width:200px; height:200px;">
+                                        <img src="{{current.image.url}}" class="mx-auto w-auto h-auto">
                                     </div>
                                     <div class="flex">
                                         <div class="text-md text-green-spotify mt-4">
@@ -57,7 +57,7 @@
                                         </div>
                                     </div>
                                     <div class="flex grid grid-cols-3 mx-auto mt-4">
-                                        <div class="text-white mx-auto hover:text-green-spotify">
+                                        <div class="text-white mx-auto hover:text-green-spotify" onclick="skip_song()">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                                 fill="currentColor">
                                                 <path
@@ -72,7 +72,7 @@
                                                     clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <div class="text-white mx-auto hover:text-green-spotify">
+                                        <div class="text-white mx-auto hover:text-green-spotify" onclick="skip_song(true)">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                                 fill="currentColor">
                                                 <path

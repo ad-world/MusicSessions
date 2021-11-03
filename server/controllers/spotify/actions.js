@@ -58,7 +58,6 @@ async function currently_playing (token) {
 }
 
 async function add_to_queue (uri, token) {
-	console.log(`${process.env.SPOTIFY_API}/me/player/queue?uri=${uri}`);
 	try {
 		const options = {
 			method  : 'post',
@@ -76,7 +75,6 @@ async function add_to_queue (uri, token) {
 			status  : 'success',
 			message : 'Song added.'
 		};
-		
 	} catch (err) {
 		return {
 			status  : 'failure',
@@ -84,4 +82,33 @@ async function add_to_queue (uri, token) {
 		};
 	}
 }
-module.exports = { search, currently_playing, add_to_queue };
+
+async function skip_song (token, next) {
+	try {
+		const action = next ? 'next' : 'previous';
+		const options = {
+			method  : 'post',
+			headers : {
+				Authorization  : 'Bearer ' + token,
+				'Content-Type' : 'application/json',
+				Accept         : 'application/json'
+			},
+			url     : `${process.env.SPOTIFY_API}/me/player/${action}`
+		};
+
+		const response = await axios(options);
+
+		return {
+			status  : 'success',
+			message : 'Song skipped'
+		};
+	} catch (err) {
+		console.log(err);
+		return {
+			status  : 'failure',
+			message : 'Undefined error'
+		};
+	}
+}
+
+module.exports = { search, currently_playing, add_to_queue, skip_song };

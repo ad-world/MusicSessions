@@ -89,4 +89,17 @@ router.get('/song/add', util.authenticated, refresh.refresh, async (req, res) =>
 	}
 });
 
+router.get('/song/skip', util.authenticated, refresh.refresh, async (req, res) => {
+	try {
+		const token = req.session.token;
+		const next = req.query.action == 'next' ? true : false;
+
+		let response = await spotify_actions.skip_song(token, next);
+		console.log(response);
+		res.send(response);
+	} catch (err) {
+		console.error(err);
+	}
+});
+
 module.exports = router;
