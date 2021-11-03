@@ -14,12 +14,18 @@ passport.deserializeUser(function (obj, done) {
 
 var persistable = {};
 
+var callbackUrl = 'http://localhost:3000';
+
+if (process.env.NODE_ENV == 'production') {
+	callbackUrl = 'https://crafty-haiku-331014.nn.r.appspot.com';
+}
+
 passport.use(
 	new SpotifyStrategy(
 		{
 			clientID     : process.env.CLIENT_ID,
 			clientSecret : process.env.CLIENT_SECRET,
-			callbackURL  : 'http://localhost:3000/api/auth/callback'
+			callbackURL  : callbackUrl + '/api/auth/callback'
 		},
 		async function (accessToken, refreshToken, expires_in, profile, done) {
 			const data = {
