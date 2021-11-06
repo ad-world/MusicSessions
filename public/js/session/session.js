@@ -12,18 +12,19 @@ $(document).ready(function () {
 		minCharacters : 2,
 		onSelect      : function (result, response) {
 			const song = result;
-			fetch('/api/session/add/song', {
-				method  : 'post',
+			fetch('/api/song/add?uri=' + song.uri, {
+				method  : 'get',
 				headers : {
 					Accept         : 'application/json',
 					'Content-Type' : 'application/json'
-				},
-				body    : JSON.stringify({
-					song : song
-				})
+				}
 			})
 				.then((res) => res.json())
-				.then((res) => console.log(res))
+				.then((res) => {
+					if (res.status == 'success') {
+						alert_message('Success', 'The song was added successfully!', '#1DB954');
+					} 
+				})
 				.catch((err) => console.error(err));
 		}
 	});
@@ -94,7 +95,7 @@ function add_song (uri, song_id) {
 		.then((res) => res.json())
 		.then((res) => {
 			if (res.status == 'failure') {
-				alert_message('Something went wrong', res.message);
+				alert_message('Something went wrong', res.message, '#E61565');
 			} else {
 				remove_song(song_id);
 			}
@@ -109,8 +110,8 @@ function skip_song (next) {
 	fetch(`/api/song/skip?action=${next}`)
 		.then((res) => res.json())
 		.then((res) => {
-			if (res.staus == 'failure') {
-				alert_message('Something went wrong', res.mesasge);
+			if (res.status == 'failure') {
+				alert_message('Something went wrong', res.message, '#E61565');
 			} else {
 				var temp = location.href;
 				location.href = temp;
