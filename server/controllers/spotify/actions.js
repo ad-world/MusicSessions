@@ -111,4 +111,31 @@ async function skip_song (token, next) {
 	}
 }
 
-module.exports = { search, currently_playing, add_to_queue, skip_song };
+async function pause_song (token) {
+	try {
+		const options = {
+			method  : 'put',
+			headers : {
+				Authorization  : 'Bearer ' + token,
+				'Content-Type' : 'application/json',
+				Accept         : 'application/json'
+			},
+			url     : `${process.env.SPOTIFY_API}/me/player/pause`
+		};
+
+		const response = await axios(options);
+
+		return {
+			status  : 'success',
+			message : 'Song paused'
+		};
+	} catch (err) {
+		console.log(err);
+		return {
+			status  : 'failure',
+			message : 'Undefined error'
+		};
+	}
+}
+
+module.exports = { search, currently_playing, add_to_queue, skip_song, pause_song };
