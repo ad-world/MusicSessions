@@ -130,7 +130,30 @@ async function pause_song (token) {
 			message : 'Song paused'
 		};
 	} catch (err) {
-		console.log(err);
+		console.log(err.response);
+		let code = err.response.status;
+		try {
+			if(code == 404 || code == 403) {
+				const options = {
+					method: 'put',
+					headers : {
+						Authorization  : 'Bearer ' + token,
+						'Content-Type' : 'application/json',
+						Accept         : 'application/json'
+					},
+					url     : `${process.env.SPOTIFY_API}/me/player/play`
+				}
+	
+				const response = await axios(options);
+
+				return {
+					status: 'success',
+					message: 'Song restarted'
+				}
+			}
+		} catch (err) {
+			console.log(err);
+		}
 		return {
 			status  : 'failure',
 			message : 'Undefined error'
