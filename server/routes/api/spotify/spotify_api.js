@@ -101,4 +101,16 @@ router.get('/song/skip', util.authenticated, refresh.refresh, async (req, res) =
 	}
 });
 
+router.get('/song/pause', util.authenticated, refresh.refresh, async (req, res) => {
+	try {
+		const token = req.session.token;
+
+		let response = await spotify_actions.pause_song(token);
+
+		res.send(response);
+	} catch (err) {
+		console.error(err)
+	}
+})
+
 module.exports = router;
