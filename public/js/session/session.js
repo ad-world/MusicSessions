@@ -119,3 +119,14 @@ function skip_song (next) {
 		})
 		.catch((err) => console.error(err));
 }
+
+function pause_song() {
+	fetch(`/api/song/pause`)
+		.then(res => res.json())
+		.then(res => {
+			if(res.status == 'failure') {
+				alert_message('Something went wrong', res.message, '#E61565');
+			}
+		})
+		.catch(err => console.error(err));
+}
