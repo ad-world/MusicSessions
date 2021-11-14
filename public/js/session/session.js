@@ -107,7 +107,7 @@ function skip_song (next) {
 	let action = 'prev';
 	if (next) action = 'next';
 
-	fetch(`/api/song/skip?action=${next}`)
+	fetch(`/api/song/skip?action=${action}`)
 		.then((res) => res.json())
 		.then((res) => {
 			if (res.status == 'failure') {
