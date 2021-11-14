@@ -10,10 +10,10 @@ function message (errorDiv, header, headerVal, error, errorVals) {
 	$(`#${errorDiv}`).removeClass('hidden');
 }
 
-function alert_message (header, message) {
+function alert_message (header, message, color) {
 	$('#alert-header').html(header);
 	$('#alert-body').html(message);
-
+	$('#alert').css('background-color', color)
 	$('#alert').removeClass('hidden');
 }
 

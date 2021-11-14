@@ -1,4 +1,4 @@
-<div class="lg:h-full h-auto bg-gradient-to-r from-blue-dark to-blue-light">
+<div class="h-100 md:h-full bg-gradient-to-r from-blue-dark to-blue-light">
     <div class="container mx-auto">
         <div class="flex justify-between">
             <div class="p-6 text-white">Logo + Text</div>
@@ -10,7 +10,7 @@
         <div class="container">
             <div class="grid grid-cols-1 items-center justify-center content-center gap-y-8">
                 <div class="mx-auto w-3/4">
-                    <div id="alert" class="ui message hidden" style="background-color: #E61565;">
+                    <div id="alert" class="ui message hidden">
                         <i class="close icon" onclick="hide_alert()"></i>
                         <div class="header" id="alert-header">
                         </div>
@@ -64,7 +64,7 @@
                                                     d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
                                             </svg>
                                         </div>
-                                        <div class="text-white mx-auto hover:text-green-spotify">
+                                        <div class="text-white mx-auto hover:text-green-spotify" onclick="pause_song()">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                                 fill="currentColor">
                                                 <path fill-rule="evenodd"
