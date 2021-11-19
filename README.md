@@ -5,4 +5,4 @@ Users will be able to join the session through QR codes or regular codes, and th
 
 Currently deployed <a href="https://musicsessions.tech/">here</a>!
 
-NOTE: I am currently in the process of getting a quote extension from Spotify. If you are unable to login, it means I have not gotten that extension yet!
+NOTE: I am currently in the process of getting a API quota extension from Spotify. If you are unable to login, it means I have not gotten that extension yet!
