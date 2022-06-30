@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
 	purge    : [],
 	darkMode : false, // or 'media' or 'class'
@@ -19,7 +21,10 @@ module.exports = {
 			red   : {
 				main : '#E61565'
 			},
-			black: '#000000'
+			black: '#000000',
+			purple: colors.purple,
+			pink: colors.pink,
+			indigo: colors.indigo
 		}
 	},
 	variants : {

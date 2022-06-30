@@ -1,48 +1,48 @@
-<div class="h-screen bg-gradient-to-r from-blue-dark to-blue-light">
+<div class="h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
     <div class="container mx-auto">
         <div class="flex justify-between">
-            <div class="p-6 text-white">Logo + Text</div>
+            <div class="p-6 text-black">Music Sessions</div>
         </div>
-        <div class="container">
-            <div class="grid grid-cols-1 items-center justify-center content-center gap-y-8 px-3">
+        <div class="container flex items-center justify-center">
+            <div class="grid grid-cols-1 gap-y-8 lg:p-12 p-4 bg-white lg:w-96 md:w-1/2 w-5/6 rounded-3xl lg:mt-16 md:mt-12">
                 {{#if errors}}
                 <div class="mx-auto rounded-lg p-4 bg-red-main items-center justify-center">
-                    <div class="font-incosolata text-3xl text-white mx-auto items-center justify-center">
+                    <div class="font-incosolata text-3xl text-black mx-auto items-center justify-center">
                         {{errors}}
                     </div>
                 </div>
                 {{/if}}
-                <div class="justify-center text-center font-incosolata text-white text-5xl">
+                <div class="justify-center font-incosolata text-black text-2xl">
                     Welcome to Music Sessions!
                 </div>
-                <div class="justify-center text-center font-work-sans text-white">
-                    Welcome to Music Sessions! A platform where you can create 
-                    collaborative queues at parties and gatherings! <br>To host a session,
-                    click on CREATE SESSION. To join a session, click on JOIN A SESSION.<br>
+                <div class="justify-center font-work-sans text-black">
+                    A platform where you can create 
+                    collaborative queues at parties and gatherings! To host a session,
+                    click on CREATE SESSION. To join a session, click on JOIN A SESSION.
                     You must have Spotify premium to use this service!
                 </div>
-                <div class="lg:space-x-4 justify-around text-center">
+                <div class="justify-around text-center">
                     <a href="/join" class="">
                         <button type="button"
-                            class="lg:mb-0 mb-10 border-white text-white font-bold py-2 px-4 rounded-full w-44 border-2 hover:bg-green-spotify">
+                            class="mb-4 border-white text-black font-bold bg-purple-500 py-2 px-4 rounded-full w-44 border-2 hover:bg-pink-500">
                             JOIN A SESSION
                         </button>
                     </a>
                     <a href="/create" class="">
                         <button type="button"
-                            class="lg:mb-0 mb-10 border-white text-white font-bold py-2 px-4 rounded-full w-44 border-2 hover:bg-green-spotify">
+                            class="border-white text-black font-bold bg-purple-500 py-2 px-4 rounded-full w-44 border-2 hover:bg-pink-500">
                             CREATE SESSION
                         </button>
                     </a>
                 </div>
                 {{#if session.connected_id}}
                     <div class="mx-auto text-center">
-                        <div class="text-xl text-white mb-4">
+                        <div class="text-xl text-black mb-4">
                             You may already be connected to a session. Click below to rejoin.
                         </div>
                         <a href="/session/user/{{session.queue_id}}">
                             <button type="button"
-                            class="lg:mb-0 mb-10 border-white text-white font-bold py-2 px-4 rounded-full w-44 border-2 hover:bg-red-main">
+                            class="lg:mb-0 mb-10 border-white text-black font-bold py-2 px-4 rounded-full w-44 border-2 hover:bg-red-main">
                             REJOIN SESSION
                         </button>
                         </a>
