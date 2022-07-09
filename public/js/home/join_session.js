@@ -2,7 +2,7 @@ function join_session () {
 	var name = $('#name').val();
 	var code = $('#code').val();
 
-	if(form_validation(['name', 'code'])) {
+	if(form_validation(['name', 'code'], ['name-error', 'code-error'])) {
 		fetch('/api/session/join', {
 			method  : 'post',
 			headers : {
@@ -33,18 +33,21 @@ function join_session () {
 	}
 }
 
-function form_validation(tag_names) {
+function form_validation(tag_names, error_labels) {
 	let errors = false;
 	for(let i = 0; i < tag_names.length; i++) {
 		const current_el = $(`#${tag_names[i]}`).val();
 		if(!current_el.length) {
 			$(`#${tag_names[i]}`).removeClass('border-black border-solid border-2');
 			$(`#${tag_names[i]}`).addClass('border-red-main border-2');
+			$(`#${error_labels[i]}`).text("Cannot be empty");
 			errors = true;
 		} else {
 			$(`#${tag_names[i]}`).addClass('border-black border-solid border-2');
+			$(`#${error_labels[i]}`).text("");
 		}
 	}
+
 
 	return !errors;
 }

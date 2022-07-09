@@ -4,8 +4,8 @@
             <div class="p-6 text-white">Music Sessions</div>
         </div>
             <div class="container flex items-center justify-center">
-                <div class="grid grid-rows-2 lg:p-12 p-4 bg-white lg:w-1/2 rounded-3xl lg:mt-16 md:mt-12">
-                    <div class="col-span-2">
+                <div class="grid lg:p-12 p-4 bg-white lg:w-1/2 rounded-3xl lg:mt-16 md:mt-12">
+                    <div class="col-span-2 mb-5">
                         {{#if errors}}
                         <div class="mx-auto rounded-lg p-4 bg-red-main items-center justify-center">
                             <div class="font-incosolata text-3xl text-black mx-auto items-center justify-center">
@@ -48,19 +48,21 @@
                                     <div class="w-2/3">
                                         <input id="name" type="text"
                                             class="text-sm p-2 text-black rounded-lg bg-white bg-opacity-0 border-solid border-2 border-black" />
+                                            <p class="text-red-main text-sm" id="name-error"></p>
                                     </div>
                                     <div class=" pb-2">
                                         <label class="text-black text-sm" for="code">Session Code</label>
                                     </div>
-                                    <div class="w-2/3">
+                                    <div class="w-2/3 mb-5">
                                         <input id="code" type="text"
-                                            class="text-sm p-2 text-black rounded-lg mb-10 bg-white bg-opacity-0 border-solid border-2 border-black" />
+                                            class="text-sm p-2 text-black rounded-lg bg-white bg-opacity-0 border-solid border-2 border-black" />
+                                            <p class="text-red-main text-sm" id="code-error"></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <button type="button" onclick="join_session()"
-                                    class="mb-4 border-white text-white font-bold bg-gradient-to-r from-indigo-500 to-purple-500 py-2 px-4 rounded-full w-44 border-2 hover:bg-pink-500">
+                                    class="mb-0 border-white text-white font-bold bg-gradient-to-r from-indigo-500 to-purple-500 py-2 px-4 rounded-full w-44 border-2 hover:bg-pink-500">
                                     JOIN SESSION
                         </button>
                     </div>
