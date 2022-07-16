@@ -6,30 +6,30 @@
                 <a href="/api/logout">Logout</a>
             </div>
         </div>
-        <div class="container">
-            <div class="grid grid-cols-1 items-center justify-center content-center gap-y-8">
-                <div class="justify-center text-center font-incosolata text-white text-5xl">
+        <div class="container mx-auto my-auto">
+            <div class="grid grid-cols-1 items-center justify-center content-center gap-y-8 bg-white w-1/2 mx-auto p-6 rounded-3xl lg:mt-48 h-2/3">
+                <div class="justify-center text-center font-incosolata text-grey text-5xl">
                     Hi {{name}}!
                 </div>
                 {{#if online.online}}
-                <div class="justify-center text-center font-work-sans text-white">
+                <div class="justify-center text-center font-work-sans text-grey">
                     You already have a session in progress. Click below to rejoin that session.
                 </div>
                 <div class="lg:space-x-4 justify-around text-center">
                     <a href="/session/{{online.id}}">
                         <button type="button"
-                            class="lg:mb-0 mb-10 border-white text-white font-bold py-2 px-4 rounded-full w-44 border-2 hover:bg-green-spotify">
+                            class="lg:mb-0 mb-10 border-white text-white font-bold py-2 px-4 rounded-full w-44 border-2 bg-gradient-to-r from-indigo-500 to-purple-500 hover:">
                             REJOIN
                         </button>
                     </a>
                 </div>
                 {{else}}
-                <div class="justify-center text-center font-work-sans text-white">
+                <div class="justify-center text-center font-work-sans text-grey">
                     Start a session by clicking create session below!
                 </div>
                 <div class="lg:space-x-4 justify-around text-center">
                     <button type="button" onclick="create_queue()"
-                        class="lg:mb-0 mb-10 border-white text-white font-bold py-2 px-4 rounded-full w-44 border-2 hover:bg-green-spotify">
+                        class="lg:mb-0 mb-10 border-white font-bold py-2 px-4 rounded-full w-44 border-2 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-purple-500 hover:to-indigo-500 text-white">
                         CREATE SESSION
                     </button>
                 </div>

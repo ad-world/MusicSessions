@@ -13,7 +13,20 @@
                             </div>
                         </div>
                         {{/if}}
-                        <div class="justify-center font-incosolata text-black text-2xl">
+                        {{#if session.connected_id}}
+                            <div class="mx-auto mb-2">
+                                <div class="text-xl text-black mb-2">
+                                    You may already be connected to a session. Click below to rejoin.
+                                </div>
+                                <a href="/session/user/{{session.queue_id}}">
+                                    <button type="button"
+                                    class="lg:mb-0 mb-10 border-white text-white font-bold py-2 px-4 rounded-full w-44 border-2 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-purple-500 hover:to-indigo-500">
+                                    REJOIN SESSION
+                                </button>
+                                </a>
+                            </div>    
+                        {{/if}} 
+                        <div class="justify-center font-incosolata text-black text-2xl font-bold">
                             Welcome to Music Sessions!
                         </div>
                         <br>
@@ -23,19 +36,6 @@
                             click on CREATE SESSION. To join a session, click on JOIN A SESSION.
                             You must have Spotify premium to use this service!
                         </div>
-                        {{#if session.connected_id}}
-                            <div class="mx-auto text-center">
-                                <div class="text-xl text-black mb-4">
-                                    You may already be connected to a session. Click below to rejoin.
-                                </div>
-                                <a href="/session/user/{{session.queue_id}}">
-                                    <button type="button"
-                                    class="lg:mb-0 mb-10 border-white text-black font-bold py-2 px-4 rounded-full w-44 border-2 hover:bg-red-main">
-                                    REJOIN SESSION
-                                </button>
-                                </a>
-                            </div>    
-                        {{/if}} 
                     </div>
                     <div class="">
                         <div class="text-black text-xl">
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <button type="button" onclick="join_session()"
-                                    class="mb-0 border-white text-white font-bold bg-gradient-to-r from-indigo-500 to-purple-500 py-2 px-4 rounded-full w-44 border-2 hover:bg-pink-500">
+                                    class="mb-0 border-white text-white font-bold bg-gradient-to-r from-indigo-500 to-purple-500 py-2 px-4 rounded-full w-44 border-2 hover:from-purple-500 hover:to-indigo-500">
                                     JOIN SESSION
                         </button>
                     </div>
@@ -75,7 +75,7 @@
                         <div class="">
                             <a href="/api/auth/spotify" class="">
                                 <button type="button"
-                                    class="border-white text-white font-bold bg-gradient-to-r from-indigo-500 to-purple-500 py-2 px-4 rounded-full w-44 border-2 hover:bg-pink-500">
+                                    class="border-white text-white font-bold bg-gradient-to-r from-indigo-500 to-purple-500 py-2 px-4 rounded-full w-44 border-2 hover:from-purple-500 hover:to-indigo-500">
                                     CREATE SESSION
                                 </button>
                             </a>

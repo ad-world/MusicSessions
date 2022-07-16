@@ -8,11 +8,101 @@
         </div>
 
         <div class="container">
-            <div class="grid grid-cols-1 items-center justify-center content-center gap-y-8">
+            <div class="grid grid-cols-1 items-center justify-center content-center gap-y-8 w-5/6 mx-auto">
                 <div class="justify-center text-center font-incosolata text-white text-5xl">
-                    Welcome to {{host_name}}'s Session! - {{join_id}}
+                    Welcome to {{host_name}}'s Session!
                 </div>
-                <div class="grid lg:grid-cols-2 w-1/2 mx-auto justify-center content-center gap-x-8 gap-y-8">
+                <div class="grid lg:grid-cols-1 lg:w-full gap-x-8 gap-y-8 ">
+                    <div class="mx-auto">
+                        <div class="ui search">
+                            <div class="ui icon input">
+                                <input class="prompt" type="text" placeholder="Search songs...">
+                                <i class="search icon"></i>
+                            </div>
+                            <div class="results"></div>
+                        </div>
+                    </div>
+                    <div class="bg-white w-full rounded-3xl p-6 mb-10 lg:mb-0 ">
+                        <div class="grid lg:grid-cols-3 grid-cols-1">
+                            <div class="grid col-span-1 row-span-1 max-h-24">
+                                <div class="font-inconsolata text-black text-2xl lg:text-4xl text-center mx-auto pt-6 ">
+                                Currently Playing
+                                </div>
+                            </div>
+                            <div class="grid col-span-2 row-span-1 max-h-24">
+                                <div class="font-inconsolata text-black text-2xl lg:text-4xl text-center mx-auto pt-6 ">
+                                Song Requests
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid lg:grid-cols-3 grid-cols-1 flex">
+                            <div
+                                class="container rounded-3xl bg-black w-5/6 mx-auto py-2 my-4 outline-white mx-auto max-h-96">
+                                {{#if current}}
+                                <div class="m-4 p-4 rounded-lg mx-auto justify-center">
+                                    <div class="object-scale-down rounded-3xl mx-auto outline-white w-48 h-48">
+                                        <img src="{{current.image.url}}" class="mx-auto w-auto h-auto rounded-3xl">
+                                    </div>
+                                    <div class="flex">
+                                        <div class="mt-4">
+                                            <div class="bg-black text-md text-white p-1 rounded">
+                                                {{current.name}}
+                                            </div>
+                                            <div class="text-md text-gray-500">
+                                                {{#each current.artists}}
+                                                {{this}}
+                                                {{/each}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{else}}
+                                <div class="font-incosolata text-white m-2 p-2">
+                                    The player is not currently active - nothing is playing at the moment!
+                                </div>
+                                {{/if}}
+                            </div>
+                            <div class="col-span-2">
+                                <div class="mx-auto w-full h-full">
+                                    <div class="container w-full h-full">
+                                        <div
+                                            class="container rounded-3xl bg-black w-5/6 mx-auto p-2 my-4 overflow-y-scroll max-h-96">
+                                            {{#if songs.length}}
+                                            {{#each songs}}
+                                            <div class="w-full pl-4 my-2 border-dashed border-b-2 border-gray-500">
+                                                <div class="flex justify-between">
+                                                    <div class="inline-flex">
+                                                        <div class="rounded-lg col-span-1 w-20 h-20" >
+                                                            <img src="{{this.image}}">
+                                                        </div>
+                                                        <div class="cols-span-1">
+                                                            <div class="text-md text-white">
+                                                                {{this.name}}
+                                                            </div>
+                                                            <div class="text-md text-gray-500">
+                                                                {{#each this.artists}}
+                                                                {{this}}
+                                                                {{/each}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{/each}}
+                                            {{else}}
+                                            <div class="font-inconsolata text-white text-xl text-center mx-auto">
+                                                There are currently no songs requested
+                                            </div>
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+                {{!-- <div class="grid lg:grid-cols-2 w-1/2 mx-auto justify-center content-center gap-x-8 gap-y-8">
                     <div class="mx-auto">
                         <div class="ui grey font-inconsolata inverted medium header">
                             Search for songs
@@ -58,7 +148,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

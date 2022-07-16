@@ -1,14 +1,14 @@
-<div class="h-100 md:h-full bg-gradient-to-r from-indigo-500 to-purple-500">
+<div class="h-auto min-h-full bg-gradient-to-r from-indigo-500 to-purple-500">
     <div class="container mx-auto">
         <div class="flex justify-between">
-            <div class="p-6 text-white">Music Sessions</div>
+            <div class="p-6 text-white">Music Sessions - {{join_id}}</div>
             <div class="p-6 text-white">
-                <a href="/api/logout">Logout</a>
+                <a href="/api/logout" class="text-white hover:text-white">Logout</a>
             </div>
         </div>
 
         <div class="container">
-            <div class="grid grid-cols-1 items-center justify-center content-center gap-y-8">
+            <div class="grid grid-cols-1 items-center justify-center content-center w-5/6 mx-auto rounded-3xl">
                 <div class="mx-auto w-3/4">
                     <div id="alert" class="ui message hidden">
                         <i class="close icon" onclick="hide_alert()"></i>
@@ -18,14 +18,14 @@
                         </p>
                     </div>
                 </div>
-                <div class="justify-center text-center font-incosolata text-white text-5xl">
-                    Your Session - {{join_id}}
+                <div class="justify-center text-center font-incosolata text-white text-5xl mb-4">
+                    Your Session
+                    <div class="text-xl">
+                        <button id="session_id" onclick="show_session_id('{{join_id}}')">Click here to reveal your Session ID</button>
+                    </div>
                 </div>
-                <div class="grid lg:grid-cols-4 lg:w-full gap-x-8 gap-y-8 ">
+                <div class="grid lg:grid-cols-1 lg:w-full gap-x-8 gap-y-8 ">
                     <div class="mx-auto">
-                        <div class="ui grey font-inconsolata inverted medium header">
-                            Search for songs
-                        </div>
                         <div class="ui search">
                             <div class="ui icon input">
                                 <input class="prompt" type="text" placeholder="Search songs...">
@@ -34,22 +34,33 @@
                             <div class="results"></div>
                         </div>
                     </div>
-                    <div class="mx-auto w-3/4 lg:w-full h-full">
-                        <div class="container rounded-lg bg-green-spotify w-full h-full">
-                            <div class="font-inconsolata text-white text-2xl lg:text-4xl text-center mx-auto pt-6">
+                    <div class="bg-white w-full rounded-3xl p-6 mb-10 lg:mb-0 ">
+                        <div class="grid lg:grid-cols-3 grid-cols-1">
+                            <div class="grid col-span-1 row-span-1 max-h-24">
+                                <div class="font-inconsolata text-black text-2xl lg:text-4xl text-center mx-auto pt-6 ">
                                 Currently Playing
+                                </div>
                             </div>
+                            <div class="grid col-span-2 row-span-1 max-h-24">
+                                <div class="font-inconsolata text-black text-2xl lg:text-4xl text-center mx-auto pt-6 ">
+                                Song Requests
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid lg:grid-cols-3 grid-cols-1 flex">
                             <div
-                                class="container rounded-lg bg-black w-5/6 mx-auto py-2 my-4 outline-white max-h-96 mx-auto">
+                                class="container rounded-3xl bg-black w-5/6 mx-auto py-2 my-4 outline-white mx-auto max-h-96">
                                 {{#if current}}
                                 <div class="m-4 p-4 rounded-lg mx-auto justify-center">
-                                    <div class="object-scale-down rounded-lg mx-auto outline-white" style="width:200px; height:200px;">
-                                        <img src="{{current.image.url}}" class="mx-auto w-auto h-auto">
+                                    <div class="object-scale-down rounded-3xl mx-auto outline-white w-48 h-48">
+                                        <img src="{{current.image.url}}" class="mx-auto w-auto h-auto rounded-3xl">
                                     </div>
                                     <div class="flex">
-                                        <div class="text-md text-green-spotify mt-4">
-                                            {{current.name}}
-                                            <div class="text-md text-white">
+                                        <div class="mt-4">
+                                            <div class="bg-black text-md text-white p-1 rounded">
+                                                {{current.name}}
+                                            </div>
+                                            <div class="text-md text-gray-500">
                                                 {{#each current.artists}}
                                                 {{this}}
                                                 {{/each}}
@@ -58,14 +69,14 @@
                                     </div>
                                     <div class="flex grid grid-cols-3 mx-auto mt-4">
                                         <div class="text-white mx-auto hover:text-green-spotify" onclick="skip_song()">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20"
                                                 fill="currentColor">
                                                 <path
                                                     d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
                                             </svg>
                                         </div>
                                         <div class="text-white mx-auto hover:text-green-spotify" onclick="pause_song()">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20"
                                                 fill="currentColor">
                                                 <path fill-rule="evenodd"
                                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
@@ -73,7 +84,7 @@
                                             </svg>
                                         </div>
                                         <div class="text-white mx-auto hover:text-green-spotify" onclick="skip_song(true)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20"
                                                 fill="currentColor">
                                                 <path
                                                     d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
@@ -88,86 +99,63 @@
                                 </div>
                                 {{/if}}
                             </div>
-                        </div>
-                    </div>
-                    <div class="mx-auto w-3/4 lg:w-full h-full">
-                        <div class="container rounded-lg bg-green-spotify w-full h-full">
-                            <div class="font-inconsolata text-white text-2xl lg:text-4xl text-center mx-auto pt-6">
-                                Song Requests
-                            </div>
-                            <div
-                                class="container rounded-lg bg-black w-5/6 mx-auto py-2 my-4 outline-white overflow-y-scroll max-h-96">
-                                {{#if songs.length}}
-                                {{#each songs}}
-                                <div class="m-4 p-4 my-6 rounded-lg outline-white">
-                                    <div class="flex justify-between justify-content-around">
-                                        <div class="text-md text-green-spotify">
-                                            {{this.name}}
-                                            <div class="text-md text-white">
-                                                {{#each this.artists}}
-                                                {{this}}
-                                                {{/each}}
-                                            </div>
-                                            <div class="flex gap-x-4 mt-4">
-                                                <div class="text-white hover:text-green-spotify"
-                                                    onclick="add_song('{{this.uri}}', '{{this.id}}')">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                        viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fill-rule="evenodd"
-                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                            clip-rule="evenodd" />
-                                                    </svg>
+                            <div class="col-span-2">
+                                <div class="mx-auto w-full h-full">
+                                    <div class="container w-full h-full">
+                                        <div
+                                            class="container rounded-3xl bg-black w-5/6 mx-auto p-2 my-4 overflow-y-scroll max-h-96">
+                                            {{#if songs.length}}
+                                            {{#each songs}}
+                                            <div class="w-full pl-4 my-2 border-dashed border-b-2 border-gray-500">
+                                                <div class="flex justify-between">
+                                                    <div class="inline-flex">
+                                                        <div class="rounded-lg col-span-1 w-20 h-20" >
+                                                            <img src="{{this.image}}">
+                                                        </div>
+                                                        <div class="cols-span-1">
+                                                            <div class="text-md text-white">
+                                                                {{this.name}}
+                                                            </div>
+                                                            <div class="text-md text-gray-500">
+                                                                {{#each this.artists}}
+                                                                {{this}}
+                                                                {{/each}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex gap-x-4 mt-4">
+                                                            <div class="text-white hover:text-green-spotify"
+                                                                onclick="add_song('{{this.uri}}', '{{this.id}}')">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10"
+                                                                    viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                                        clip-rule="evenodd" />
+                                                                </svg>
+                                                            </div>
+                                                            <div class="text-white hover:text-red-main"
+                                                                onclick="remove_song('{{this.id}}')">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10"
+                                                                    viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                                                        clip-rule="evenodd" />
+                                                                </svg>
+                                                            </div>
+                                                        </div>
                                                 </div>
-                                                <div class="text-white hover:text-red-main"
-                                                    onclick="remove_song('{{this.id}}')">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                        viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fill-rule="evenodd"
-                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                                                            clip-rule="evenodd" />
-                                                    </svg>
-                                                </div>
                                             </div>
-                                        </div>
-
-                                        <div class="object-scale-down rounded-lg" width="25" height="25">
-                                            <img src="{{this.image}}">
+                                            {{/each}}
+                                            {{else}}
+                                            <div class="font-inconsolata text-white text-xl text-center mx-auto">
+                                                There are currently no songs requested
+                                            </div>
+                                            {{/if}}
                                         </div>
                                     </div>
-
-                                </div>
-                                {{/each}}
-                                {{else}}
-                                <div class="font-inconsolata text-white text-xl text-center mx-auto">
-                                    There are currently no songs requested
-                                </div>
-                                {{/if}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mx-auto w-3/4 lg:w-full h-full pb-4">
-                        <div class="container rounded-lg bg-white w-full h-full">
-                            <div class="font-inconsolata text-2xl lg:text-4xl text-center mx-auto pt-6">
-                                Connected - {{size}}
-                            </div>
-                            <div class="container rounded-lg outline-solid">
-                                <div class="grid grid-cols-1 p-3">
-                                    {{#each connected}}
-                                    <div class="flex justify-between my-1">
-                                        <div class="text-xl">
-                                            {{this.name}}
-                                        </div>
-                                        <div>
-                                            <button onclick="remove_rager('{{this.id}}')"
-                                                class="hover:bg-red-main text-black hover:text-white rounded text-xl">
-                                                <i class="x icon  pl-1 pt-1"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    {{/each}}
                                 </div>
                             </div>
-                        </div>
+                        </div>   
                     </div>
                 </div>
             </div>
