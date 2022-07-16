@@ -17,14 +17,18 @@ module.exports = {
 				light : '#0D1A8E',
 				dark  : '#13043F'
 			},
-			white : '#FFFFFF',
+			white : '#edf2f4',
 			red   : {
 				main : '#E61565'
 			},
 			black: '#000000',
 			purple: colors.purple,
 			pink: colors.pink,
-			indigo: colors.indigo
+			indigo: colors.indigo,
+			gray: colors.gray
+		},
+		fontFamily: {
+			'body': ['"Inter"']
 		}
 	},
 	variants : {
