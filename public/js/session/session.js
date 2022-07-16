@@ -130,3 +130,7 @@ function pause_song() {
 		})
 		.catch(err => console.error(err));
 }
+
+function show_session_id(session_id) {
+	$('#session_id').text(session_id);
+}
