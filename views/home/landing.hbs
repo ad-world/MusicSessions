@@ -1,11 +1,11 @@
-<div class="h-screen bg-gradient-to-r from-indigo-500 to-purple-500">
+<div class="h-full lg:h-screen bg-gradient-to-r from-indigo-500 to-purple-500">
     <div class="container mx-auto">
         <div class="flex justify-between">
             <div class="p-6 text-white">Music Sessions</div>
         </div>
             <div class="container flex items-center justify-center">
-                <div class="grid lg:p-12 p-4 bg-white lg:w-1/2 rounded-3xl lg:mt-16 md:mt-12">
-                    <div class="col-span-2 mb-5">
+                <div class="grid lg:p-12 p-4 bg-white lg:w-1/2 rounded-3xl lg:mt-16 md:mt-12 w-5/6 mb-12 md:mb-0">
+                    <div class="mb-5">
                         {{#if errors}}
                         <div class="mx-auto rounded-lg p-4 bg-red-main items-center justify-center">
                             <div class="font-incosolata text-3xl text-black mx-auto items-center justify-center">
@@ -37,7 +37,7 @@
                             You must have Spotify premium to use this service!
                         </div>
                     </div>
-                    <div class="">
+                    <div class="grid grid-cols-1 md:grid-cols-2">
                         <div class="text-black text-xl">
                             Join A Session
                             <div>
@@ -60,32 +60,31 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <button type="button" onclick="join_session()"
+                            <button type="button" onclick="join_session()"
                                     class="mb-0 border-white text-white font-bold bg-gradient-to-r from-indigo-500 to-purple-500 py-2 px-4 rounded-full w-44 border-2 hover:from-purple-500 hover:to-indigo-500">
                                     JOIN SESSION
-                        </button>
-                    </div>
-                    <div class="">
-                        <div class="text-black text-xl">
-                            Create A Session
+                            </button>
                         </div>
-                        <h4 class="texl-xl text-black">To create a session, please login with spotify</h4>
-                        <br />
-                        <div class="">
-                            <a href="/api/auth/spotify" class="">
-                                <button type="button"
-                                    class="border-white text-white font-bold bg-gradient-to-r from-indigo-500 to-purple-500 py-2 px-4 rounded-full w-44 border-2 hover:from-purple-500 hover:to-indigo-500">
-                                    CREATE SESSION
-                                </button>
-                            </a>
+                        <div class="mt-6 md:mt-0">
+                            <div class="text-black text-xl">
+                                Create A Session
+                            </div>
+                            <h4 class="texl-xl text-black">To create a session, please login with spotify</h4>
+                            <br />
+                            <div class="">
+                                <a href="/api/auth/spotify" class="">
+                                    <button type="button"
+                                        class="border-white text-white font-bold bg-gradient-to-r from-indigo-500 to-purple-500 py-2 px-4 rounded-full w-44 border-2 hover:from-purple-500 hover:to-indigo-500">
+                                        CREATE SESSION
+                                    </button>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="hidden transition-all mt-10" role="alert" id="errors">
-                    <div class="bg-red-main text-white font-bold rounded-t px-4 py-2" id="error-header">
-                    </div>
-                    <div class="border-red border-t-0 border-red-400 text-white rounded-b bg-red-main px-4 py-3 text-red-700" id="error-message">
+                    <div class="hidden transition-all mt-10" role="alert" id="errors">
+                        <div class="bg-red-main text-white font-bold rounded-t px-4 py-2" id="error-header">
+                        </div>
+                        <div class="border-red border-t-0 border-red-400 text-white rounded-b bg-red-main px-4 py-3 text-red-700" id="error-message">
+                        </div>
                     </div>
                 </div>
             </div>
